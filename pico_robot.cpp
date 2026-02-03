@@ -15,9 +15,7 @@
 #include <string.h>
 
 #include <rmw_microros/rmw_microros.h>
-
 #include "pico/stdlib.h"
-
 #include "include/pico_robot.hpp"
 
 extern "C" {
@@ -44,6 +42,7 @@ SX1262 radio = new Module(hal, RFM_NSS, RFM_DIO1, RFM_RST, RFM_BUSY);
 int transmissionState = RADIOLIB_ERR_NONE;
 bool transmitFlag = false;
 volatile bool operationDone = false;
+
 void setFlag(void)
 {
     operationDone = true;
@@ -101,7 +100,6 @@ int main()
 
     gpio_put(LED_PIN, 1);
 
-
     stdio_init_all();          
     hal->pinMode(RFM_RST, 1);    //output     
     hal->digitalWrite(RFM_RST, 1);     //write high 
@@ -115,15 +113,30 @@ int main()
                           OUTPUT_POWER,
                           LORA_PREAMBLE_LEN,
                           TCXO_VOLTAGE);
-  radio.setCurrentLimit(CURRENT_LIMIT);
-  radio.forceLDRO(LDRO);
-  radio.setCRC(CRC);
-  radio.invertIQ(IQINVERTED);
-  radio.setWhitening(true, WHITENING_INITIAL);
-  radio.explicitHeader();
+    radio.setCurrentLimit(CURRENT_LIMIT);
+    radio.forceLDRO(LDRO);
+    radio.setCRC(CRC);
+    radio.invertIQ(IQINVERTED);
+    radio.setWhitening(true, WHITENING_INITIAL);
+    radio.explicitHeader();
 
     while ( true )
     {
+
+        uint8_t str[50]; //string to fill data into
+
+        //Hayden - recieve message and put message into above string
+        
+
+
+        if (state == RADIOLIB_ERR_NONE) {
+            // Ryan - process string and send to computer
+
+            rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
+
+
+        }
+
         rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
     }
     return 0;
