@@ -38,7 +38,8 @@ add_executable(pico_base_station
     pico_base_station.cpp
     ${CMAKE_CURRENT_LIST_DIR}/include/pico_base_station.hpp
     pico_uart_transport.c
-    pico_uart_transport.h
+    pico_uart_transport.h 
+    message_to_astro.cpp
     "${CMAKE_CURRENT_SOURCE_DIR}/RadioLib/src/hal/RPiPico/PicoHal.cpp"
 
 )
