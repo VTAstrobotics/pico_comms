@@ -18,8 +18,7 @@
 
 #include "pico/stdlib.h"
 
-#include "include/pico_base_station.hpp"
-
+#include "include/pico_robot.hpp"
 
 extern "C" {
     #include "pico_uart_transport.h"
@@ -52,7 +51,7 @@ void setFlag(void)
 
 const uint LED_PIN = 25;
 
-rcl_subscription_t joy_subscriber;
+rcl_publisher_t publisher;
 sensor_msgs__msg__Joy msg;
 
 int main()
@@ -92,18 +91,38 @@ int main()
 
     rclc_node_init_default(&node, "pico_node", "", &support);
 
-    rclc_subscription_init_default(
-        &joy_subscriber,
+        rclc_publisher_init_default(
+        &publisher,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, Joy),
         "/joy");
-
     rclc_executor_init(&executor, &support.context, 1, &allocator);
     rclc_executor_add_timer(&executor, &timer);
 
     gpio_put(LED_PIN, 1);
 
-    while (true)
+
+    stdio_init_all();          
+    hal->pinMode(RFM_RST, 1);    //output     
+    hal->digitalWrite(RFM_RST, 1);     //write high 
+    hal->spiBegin();    // fix from https://github.com/jgromes/RadioLib/issues/729
+    
+    int state = radio.begin(FREQUENCY,
+                          BANDWIDTH,
+                          SPREADING_FACTOR,
+                          CODING_RATE,
+                          SYNC_WORD,
+                          OUTPUT_POWER,
+                          LORA_PREAMBLE_LEN,
+                          TCXO_VOLTAGE);
+  radio.setCurrentLimit(CURRENT_LIMIT);
+  radio.forceLDRO(LDRO);
+  radio.setCRC(CRC);
+  radio.invertIQ(IQINVERTED);
+  radio.setWhitening(true, WHITENING_INITIAL);
+  radio.explicitHeader();
+
+    while ( true )
     {
         rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
     }
