@@ -19,30 +19,15 @@ set(PICO_SDK_FETCH_FROM_GIT on)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
-target_compile_definitions(${PROJECT_NAME} PUBLIC RADIOLIB_BUILD_RPI_PICO)
-
-
-if(WIN32)
-    set(USERHOME $ENV{USERPROFILE})
-else()
-    set(USERHOME $ENV{HOME})
-endif()
-set(sdkVersion 2.2.0)
-set(toolchainVersion 14_2_Rel1)
-set(picotoolVersion 2.2.0-a4)
-set(picoVscode ${USERHOME}/.pico-sdk/cmake/pico-vscode.cmake)
-if(EXISTS ${picoVscode})
-    include(${picoVscode})
-endif()
 set(PICO_BOARD pico2 CACHE STRING "Board type")
 
-project(pico_base_station C CXX ASM)
 
 include(pico_sdk_import.cmake)
 
 
 
 pico_sdk_init()
+project(pico_base_station C CXX ASM)
 
 
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/RadioLib")
@@ -85,6 +70,7 @@ pico_enable_stdio_uart(pico_base_station 0)
 add_compile_definitions(PICO_UART_ENABLE_CRLF_SUPPORT=0)
 add_compile_definitions(PICO_STDIO_ENABLE_CRLF_SUPPORT=0)
 add_compile_definitions(PICO_STDIO_DEFAULT_CRLF=0)
+target_compile_definitions(${PROJECT_NAME} PUBLIC RADIOLIB_BUILD_RPI_PICO)
 
 # Generate UF2
 pico_add_extra_outputs(pico_base_station)

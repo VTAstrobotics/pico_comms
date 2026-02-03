@@ -17,8 +17,13 @@
 #include <rmw_microros/rmw_microros.h>
 
 #include "pico/stdlib.h"
-#include "pico_uart_transport.h"
+
 #include "include/pico_base_station.hpp"
+
+
+extern "C" {
+    #include "pico_uart_transport.h"
+}
 
 #define FREQUENCY 915.000   //
 #define BANDWIDTH 125.0     // Sets LoRa bandwidth. Allowed values are 7.8, 10.4, 15.6, 20.8, 31.25, 41.7, 62.5, 125.0, 250.0 and 500.0 kHz.
