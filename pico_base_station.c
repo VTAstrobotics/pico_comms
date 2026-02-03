@@ -7,10 +7,44 @@
 #include <std_msgs/msg/int32.h>
 #include <sensor_msgs/msg/joy.h>
 
+#include <RadioLib.h>
+#include "hal/RPiPico/PicoHal.h"
+#include "hardware/spi.h"
+#include "hardware/timer.h"
+#include "hardware/clocks.h"
+#include <string.h>
+
+
 #include <rmw_microros/rmw_microros.h>
 
 #include "pico/stdlib.h"
 #include "pico_uart_transport.h"
+
+
+#define FREQUENCY             915.000   // 
+#define BANDWIDTH             125.0    // Sets LoRa bandwidth. Allowed values are 7.8, 10.4, 15.6, 20.8, 31.25, 41.7, 62.5, 125.0, 250.0 and 500.0 kHz.
+#define SPREADING_FACTOR      7      // Sets LoRa spreading factor. Allowed values range from 5 to 12.
+#define CODING_RATE           5      // Sets LoRa coding rate 4/x denominator. Allowed x values range from 5 to 8.
+#define CURRENT_LIMIT         140     // mA
+#define OUTPUT_POWER          22      // dBm
+#define LORA_PREAMBLE_LEN     8       // preambleLength LoRa preamble length in symbols. Allowed values range from 1 to 65535.
+#define SYNC_WORD             0x12       // public default=0x12,  LoRaWAN default=0x34
+#define LDRO                  false   // normally 'true' for SF-11 or 12
+#define CRC                   true    
+#define IQINVERTED            false
+#define DATA_SHAPING          RADIOLIB_SHAPING_1_0     // Data shaping = 1.0
+#define TCXO_VOLTAGE          1.7     // volts
+#define WHITENING_INITIAL     0x00FF   // initial whitening LFSR value
+
+PicoHal* hal = new PicoHal(SPI_PORT, SPI_MISO, SPI_MOSI, SPI_SCK);
+SX1262 radio = new Module(hal, RFM_NSS, RFM_DIO1, RFM_RST, RFM_BUSY);
+int transmissionState = RADIOLIB_ERR_NONE;
+bool transmitFlag = false;
+volatile bool operationDone = false;
+void setFlag(void){
+    operationDone = true;
+}
+
 
 const uint LED_PIN = 25;
 
