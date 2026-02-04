@@ -26,26 +26,26 @@ include(pico_sdk_import.cmake)
 
 
 
+project(pico_robot C CXX ASM)
 pico_sdk_init()
-project(pico_base_station C CXX ASM)
 
 
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/RadioLib")
 
 
 link_directories(libmicroros)
-add_executable(pico_base_station
-    pico_base_station.cpp
-    ${CMAKE_CURRENT_LIST_DIR}/include/pico_base_station.hpp
+add_executable(pico_robot
+    pico_robot.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/include/pico_robot.hpp
     pico_uart_transport.c
     pico_uart_transport.h
     "${CMAKE_CURRENT_SOURCE_DIR}/RadioLib/src/hal/RPiPico/PicoHal.cpp"
-
+    message_to_astro.cpp
+    message_to_astro.hpp
 )
 
 
-
-target_link_libraries(pico_base_station
+target_link_libraries(pico_robot
     pico_stdlib
     microros
     RadioLib
@@ -56,7 +56,7 @@ target_link_libraries(pico_base_station
     hardware_pwm
 )
 
-target_include_directories(pico_base_station PUBLIC
+target_include_directories(pico_robot PUBLIC
     libmicroros/include
 )
 
@@ -65,12 +65,12 @@ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -ffunction-sections -fdata-sections")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffunction-sections -fdata-sections")
 
 # Configure Pico
-pico_enable_stdio_usb(pico_base_station 1)
-pico_enable_stdio_uart(pico_base_station 0)
+pico_enable_stdio_usb(pico_robot 1)
+pico_enable_stdio_uart(pico_robot 0)
 add_compile_definitions(PICO_UART_ENABLE_CRLF_SUPPORT=0)
 add_compile_definitions(PICO_STDIO_ENABLE_CRLF_SUPPORT=0)
 add_compile_definitions(PICO_STDIO_DEFAULT_CRLF=0)
 target_compile_definitions(${PROJECT_NAME} PUBLIC RADIOLIB_BUILD_RPI_PICO)
 
 # Generate UF2
-pico_add_extra_outputs(pico_base_station)
+pico_add_extra_outputs(pico_robot)

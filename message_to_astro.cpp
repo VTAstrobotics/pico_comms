@@ -67,16 +67,17 @@ sensor_msgs__msg__Joy bytes_to_joy(char *bytes)
     sensor_msgs__msg__Joy msg;
 
     // change for 14
-    for (int i = 0; i < MAX_BUTTONS_BYTE_1; i++)
+    for (int i = 0; i < 8; i++)
     {
-        msg.buttons.data[i] = (bytes[1] >> (MAX_BUTTONS_BYTE_1 - 1) - i) & 0x01;
+        msg.buttons.data[i] = (bytes[1] >> ((7) - i)) & 0x01;
     }
-    for (int i = 0; i < MAX_BUTTONS_BYTE_2; i++ )
+    for (int i = 0; i < 7; i++ )
     {
-        msg.buttons.data[i + (MAX_BUTTONS_BYTE_1)] = (bytes[2] >> (MAX_BUTTONS_BYTE_2 - 1) - i) & 0x01;
+        msg.buttons.data[i + (8)] = (bytes[2] >> ((7) - i)) & 0x01;
     }
-    for(int i = 0; i < MAX_AXIS; i++){
-        msg.axes.data[0] = bytes[i + (MAX_BUTTONS - 2)];
+    //ommitting terminating char
+    for(int i = 0; i < 6; i++){
+        msg.axes.data[i] = bytes[i + (3)];
     }
     return msg;
 }
