@@ -20,7 +20,7 @@
 
 #include "include/pico_base_station.hpp"
 #include "message_to_astro.hpp"
-//TODO: enable watchdog
+// TODO: enable watchdog
 
 extern "C"
 {
@@ -43,6 +43,7 @@ extern "C"
 #define WHITENING_INITIAL 0x00FF          // initial whitening LFSR value
 
 int state = 0;
+
 sensor_msgs__msg__Joy last_joy;
 
 PicoHal *hal = new PicoHal(SPI_PORT, SPI_MISO, SPI_MOSI, SPI_SCK);
@@ -50,6 +51,7 @@ SX1262 radio = new Module(hal, RFM_NSS, RFM_DIO1, RFM_RST, RFM_BUSY);
 int transmissionState = RADIOLIB_ERR_NONE;
 bool transmitFlag = false;
 volatile bool operationDone = false;
+
 void setFlag(void)
 {
     operationDone = true;
@@ -58,18 +60,14 @@ void setFlag(void)
 void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
 {
 
-    char* data = joy_to_bytes(last_joy);
+    char *data = joy_to_bytes(last_joy);
     state = radio.startTransmit(data);
-
-    
-
-
 }
 
-void joy_callback(sensor_msgs__msg__Joy joy_msg){
-    
-    last_joy = joy_msg;
+void joy_callback(sensor_msgs__msg__Joy joy_msg)
+{
 
+    last_joy = joy_msg;
 }
 
 const uint LED_PIN = 25;
@@ -79,20 +77,31 @@ sensor_msgs__msg__Joy msg;
 
 int main()
 {
+
     stdio_init_all();
+
+    while (!stdio_usb_connected()) {
+        gpio_put(LED_PIN, 1);
+        sleep_ms(50);
+        gpio_put(LED_PIN, 0);
+        sleep_ms(50);
+    }
+    
+    gpio_init(LED_PIN);
+    gpio_set_dir(LED_PIN, GPIO_OUT);
 
     hal->pinMode(RFM_RST, 1);      // output
     hal->digitalWrite(RFM_RST, 1); // write high
     hal->spiBegin();               // fix from https://github.com/jgromes/RadioLib/issues/729
 
     state = radio.begin(FREQUENCY,
-                            BANDWIDTH,
-                            SPREADING_FACTOR,
-                            CODING_RATE,
-                            SYNC_WORD,
-                            OUTPUT_POWER,
-                            LORA_PREAMBLE_LEN,
-                            TCXO_VOLTAGE);
+                        BANDWIDTH,
+                        SPREADING_FACTOR,
+                        CODING_RATE,
+                        SYNC_WORD,
+                        OUTPUT_POWER,
+                        LORA_PREAMBLE_LEN,
+                        TCXO_VOLTAGE);
     radio.setCurrentLimit(CURRENT_LIMIT);
     radio.forceLDRO(LDRO);
     radio.setCRC(CRC);
@@ -109,9 +118,6 @@ int main()
         pico_serial_transport_write,
         pico_serial_transport_read);
 
-    gpio_init(LED_PIN);
-    gpio_set_dir(LED_PIN, GPIO_OUT);
-
     rcl_timer_t timer;
     rcl_node_t node;
     rcl_allocator_t allocator;
@@ -121,15 +127,21 @@ int main()
     allocator = rcl_get_default_allocator();
 
     // Wait for agent successful ping for 2 minutes.
-    const int timeout_ms = 1000;
-    const uint8_t attempts = 120;
+    const int timeout_ms = 100;
+    const uint8_t attempts = 1;
+    gpio_put(LED_PIN, 1);
 
     rcl_ret_t ret = rmw_uros_ping_agent(timeout_ms, attempts);
+    gpio_put(LED_PIN, 1);
 
-    if (ret != RCL_RET_OK)
+
+    while (rmw_uros_ping_agent(timeout_ms, attempts) != RCL_RET_OK)
     {
-        // Unreachable agent, exiting program.
-        return ret;
+        // Flash the LED to show we are searching for the agent
+        gpio_put(LED_PIN, 1);
+        sleep_ms(100);
+        gpio_put(LED_PIN, 0);
+        sleep_ms(100);
     }
 
     rclc_support_init(&support, 0, NULL, &allocator);
@@ -144,8 +156,6 @@ int main()
 
     rclc_executor_init(&executor, &support.context, 1, &allocator);
     rclc_executor_add_timer(&executor, &timer);
-
-    gpio_put(LED_PIN, 1);
 
     while (true)
     {

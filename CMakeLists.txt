@@ -26,9 +26,9 @@ include(pico_sdk_import.cmake)
 
 
 
-pico_sdk_init()
 project(pico_base_station C CXX ASM)
 
+pico_sdk_init()
 
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/RadioLib")
 
