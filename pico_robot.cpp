@@ -148,10 +148,10 @@ int main()
             {
 
                 printf("[SX1262] Data:\t\t");
-
                 printf("%s \n", (char *)str);
+
                 char command_code = str[0];
-                msg = bytes_to_joy(str);
+                bytes_to_joy(&msg, str);
 
                 rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
             }

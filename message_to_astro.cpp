@@ -62,23 +62,22 @@ signed char joy_to_char(float analog_value)
     return result;
 }
 
-sensor_msgs__msg__Joy bytes_to_joy(uint8_t *bytes)
+void bytes_to_joy(sensor_msgs__msg__Joy* msg, uint8_t *bytes)
 {
-    sensor_msgs__msg__Joy msg;
 
-    // change for 14
+    //buttons
     for (int i = 0; i < 8; i++)
     {
-        msg.buttons.data[i] = (bytes[1] >> ((7) - i)) & 0x01;
+        msg->buttons.data[i] = (bytes[1] >> ((7) - i)) & 0x01;
     }
     for (int i = 0; i < 7; i++)
     {
-        msg.buttons.data[i + (8)] = (bytes[2] >> ((7) - i)) & 0x01;
+        msg->buttons.data[i + (8)] = (bytes[2] >> ((7) - i)) & 0x01;
     }
-    // ommitting terminating char
+
+    // axes
     for (int i = 0; i < 6; i++)
     {
-        msg.axes.data[i] = bytes[i + (3)];
+        msg->axes.data[i] = bytes[i + (3)];
     }
-    return msg;
 }
