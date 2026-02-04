@@ -17,6 +17,7 @@
 #include <rmw_microros/rmw_microros.h>
 #include "pico/stdlib.h"
 #include "include/pico_robot.hpp"
+#include "message_to_astro.hpp"
 
 extern "C" {
     #include "pico_uart_transport.h"
@@ -37,12 +38,16 @@ extern "C" {
 #define TCXO_VOLTAGE 1.7                  // volts
 #define WHITENING_INITIAL 0x00FF          // initial whitening LFSR value
 
+
+
 PicoHal *hal = new PicoHal(SPI_PORT, SPI_MISO, SPI_MOSI, SPI_SCK);
 SX1262 radio = new Module(hal, RFM_NSS, RFM_DIO1, RFM_RST, RFM_BUSY);
 int transmissionState = RADIOLIB_ERR_NONE;
 bool transmitFlag = false;
-volatile bool operationDone = false;
 
+
+
+volatile bool operationDone = false;
 void setFlag(void)
 {
     operationDone = true;
@@ -126,77 +131,16 @@ int main()
         uint8_t str[50]; //string to fill data into
 
         //Hayden - recieve message and put message into above string
-        
-
 
         if (state == RADIOLIB_ERR_NONE) {
             // Ryan - process string and send to computer
             char command_code = str[0];
-            msg.buttons[0] = str[1]
-
-
+            msg = bytes_to_joy          
+            
             rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
         }
 
         rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
     }
     return 0;
-}
-
-
-
-
-std::string joy_to_bytes(sensor_msgs__msg__Joy joy_msg){
-
-    char message_to_send[10];//Extra byte for null termination
-
-    char command_code = 20;
-    message_to_send[0] = command_code;
-
-    char button1 = (joy_msg.buttons.data[0] << 7) |
-                   (joy_msg.buttons.data[1] << 6) |
-                   (joy_msg.buttons.data[2] << 5) |
-                   (joy_msg.buttons.data[3] << 4) |
-                   (joy_msg.buttons.data[4] << 3) |
-                   (joy_msg.buttons.data[5] << 2) |
-                   (joy_msg.buttons.data[6] << 1) |
-                   (joy_msg.buttons.data[7] << 0);
-
-    message_to_send[1] = button1;
-
-    char button2 = (joy_msg.buttons.data[8] << 7) |
-                   (joy_msg.buttons.data[9] << 6) |
-                   (joy_msg.buttons.data[10] << 5) |
-                   (joy_msg.buttons.data[11] << 4) |
-                   (joy_msg.buttons.data[12] << 3) |
-                   (joy_msg.buttons.data[13] << 2) |
-                   (joy_msg.buttons.data[14] << 1) |
-                   0;
-    
-    message_to_send[2] = button2;
-
-    message_to_send[3] = joy_to_char(joy_msg.axes.data[0]);
-    message_to_send[4] = joy_to_char(joy_msg.axes.data[1]);
-    message_to_send[5] = joy_to_char(joy_msg.axes.data[2]);
-    message_to_send[6] = joy_to_char(joy_msg.axes.data[3]);
-    message_to_send[7] = joy_to_char(joy_msg.axes.data[4]);
-    message_to_send[8] = joy_to_char(joy_msg.axes.data[5]);
-    message_to_send[9] = '\0';
-
-    return std::string(message_to_send);
-}
-
-signed char joy_to_char(float analog_value){
-    signed char result;
-    if(analog_value > 0){
-        result = analog_value * 127;
-    }
-    else if(analog_value < 0){
-        result = analog_value * 128;
-    }
-    else{
-        result = 0;
-    }
-
-    return result;
 }
