@@ -159,9 +159,8 @@ int main()
             state = radio.startReceive();
             // printf("LISTENING\n");
         }
-        else
-            // printf("OPERATION INCOMPLETE\n");
-            rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
+
+        rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
     }
     return 0;
 }
