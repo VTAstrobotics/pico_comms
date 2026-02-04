@@ -147,6 +147,7 @@ int main()
 
     while (true)
     {
+        // printf("TESTING");
         if (operationDone)
         {
             operationDone = false;
@@ -167,7 +168,6 @@ int main()
             state = radio.startReceive();
             // printf("LISTENING\n");
         }
-
         rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
     }
     return 0;

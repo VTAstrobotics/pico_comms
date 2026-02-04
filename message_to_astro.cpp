@@ -65,6 +65,9 @@ signed char joy_to_char(float analog_value)
 void bytes_to_joy(sensor_msgs__msg__Joy *msg, uint8_t *bytes)
 {
 
+    msg->buttons.size = 15;
+    msg->axes.size = 6;
+
     // buttons
     for (int i = 0; i < 8; i++)
     {
@@ -78,6 +81,15 @@ void bytes_to_joy(sensor_msgs__msg__Joy *msg, uint8_t *bytes)
     // axes
     for (int i = 0; i < 6; i++)
     {
-        msg->axes.data[i] = bytes[i + (3)];
+        int8_t raw_axis = (int8_t)bytes[i + 3];
+
+        if (raw_axis >= 0)
+        {
+            msg->axes.data[i] = (float)raw_axis / 127.0f;
+        }
+        else
+        {
+            msg->axes.data[i] = (float)raw_axis / 128.0f;
+        }
     }
 }
