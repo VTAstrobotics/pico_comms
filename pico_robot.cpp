@@ -146,15 +146,10 @@ int main()
 
             if (state == RADIOLIB_ERR_NONE)
             {
+
                 printf("[SX1262] Data:\t\t");
+
                 printf("%s \n", (char *)str);
-            }
-
-            // Hayden - recieve message and put message into above string
-
-            if (state == RADIOLIB_ERR_NONE)
-            {
-                // Ryan - process string and send to computer
                 char command_code = str[0];
                 msg = bytes_to_joy(str);
 

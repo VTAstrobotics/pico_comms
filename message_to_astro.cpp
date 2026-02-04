@@ -2,10 +2,10 @@
 #include <string>
 #include "message_to_astro.hpp"
 
-std::string joy_to_bytes(sensor_msgs__msg__Joy joy_msg)
+char * joy_to_bytes(sensor_msgs__msg__Joy joy_msg)
 {
 
-    char message_to_send[10]; // Extra byte for null termination
+    char *message_to_send = new char[10]; // Extra byte for null termination
 
     char command_code = 20;
     message_to_send[0] = command_code;
@@ -40,7 +40,7 @@ std::string joy_to_bytes(sensor_msgs__msg__Joy joy_msg)
     message_to_send[8] = joy_to_char(joy_msg.axes.data[5]);
     message_to_send[9] = '\0';
 
-    return std::string(message_to_send);
+    return message_to_send;
 }
 
 signed char joy_to_char(float analog_value)
@@ -62,7 +62,7 @@ signed char joy_to_char(float analog_value)
     return result;
 }
 
-sensor_msgs__msg__Joy bytes_to_joy(char *bytes)
+sensor_msgs__msg__Joy bytes_to_joy(uint8_t *bytes)
 {
     sensor_msgs__msg__Joy msg;
 
@@ -71,12 +71,13 @@ sensor_msgs__msg__Joy bytes_to_joy(char *bytes)
     {
         msg.buttons.data[i] = (bytes[1] >> ((7) - i)) & 0x01;
     }
-    for (int i = 0; i < 7; i++ )
+    for (int i = 0; i < 7; i++)
     {
         msg.buttons.data[i + (8)] = (bytes[2] >> ((7) - i)) & 0x01;
     }
-    //ommitting terminating char
-    for(int i = 0; i < 6; i++){
+    // ommitting terminating char
+    for (int i = 0; i < 6; i++)
+    {
         msg.axes.data[i] = bytes[i + (3)];
     }
     return msg;

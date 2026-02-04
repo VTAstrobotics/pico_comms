@@ -32,7 +32,3 @@ int goFSK(SX1262& radio){
 void timeout_fallBack(){
     
 }
-
-
-std::string joy_to_bytes(sensor_msgs__msg__Joy joy_msg);
-signed char joy_to_char(float analog_value);
