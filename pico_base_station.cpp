@@ -20,6 +20,7 @@
 
 #include "include/pico_base_station.hpp"
 #include "message_to_astro.hpp"
+//TODO: enable watchdog
 
 extern "C"
 {
