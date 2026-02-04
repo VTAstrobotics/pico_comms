@@ -120,12 +120,37 @@ int main()
     radio.setWhitening(true, WHITENING_INITIAL);
     radio.explicitHeader();
 
+     state = radio.startReceive();
+    if (state == RADIOLIB_ERR_NONE) {
+      printf("success!");
+    } else {
+      printf("failed, code ");
+      while (true) { sleep_ms(10); }
+    }
+
     while ( true )
     {
+        if (operationDone){
+        operationDone = false;
 
-        uint8_t str[50]; //string to fill data into
+        else{
+        uint8_t str[50];
+        int state = radio.readDatat(str, 50);
+        
+    
+         if (state == RADIOLIB_ERR_NONE) {
+            printf("[SX1262] Data:\t\t");
+            printf("%s \n", (char*)str);
+         }
+
+         
+
+
+        //string to fill data into
 
         //Hayden - recieve message and put message into above string
+
+
         
 
 
@@ -134,11 +159,14 @@ int main()
             char command_code = str[0];
             msg.buttons[0] = str[1]
 
-
             rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
         }
+        hal->delay(1000);
+
+        state = radio.startReceive();
 
         rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
+    }
     }
     return 0;
 }
