@@ -2,9 +2,9 @@
 #include <string>
 #include "message_to_astro.hpp"
 
-std::string joy_to_bytes(sensor_msgs__msg__Joy joy_msg){
+char* joy_to_bytes(sensor_msgs__msg__Joy joy_msg){
 
-    char message_to_send[10];//Extra byte for null termination
+    char* message_to_send = new char[10];//Extra byte for null termination
 
     char command_code = 20;
     message_to_send[0] = command_code;
@@ -39,7 +39,7 @@ std::string joy_to_bytes(sensor_msgs__msg__Joy joy_msg){
     message_to_send[8] = joy_to_char(joy_msg.axes.data[5]);
     message_to_send[9] = '\0';
 
-    return std::string(message_to_send);
+    return message_to_send;
 }
 
 signed char joy_to_char(float analog_value){

@@ -19,10 +19,11 @@
 #include "pico/stdlib.h"
 
 #include "include/pico_base_station.hpp"
+#include "message_to_astro.hpp"
 
-
-extern "C" {
-    #include "pico_uart_transport.h"
+extern "C"
+{
+#include "pico_uart_transport.h"
 }
 
 #define FREQUENCY 915.000   //
@@ -40,6 +41,9 @@ extern "C" {
 #define TCXO_VOLTAGE 1.7                  // volts
 #define WHITENING_INITIAL 0x00FF          // initial whitening LFSR value
 
+int state = 0;
+sensor_msgs__msg__Joy last_joy;
+
 PicoHal *hal = new PicoHal(SPI_PORT, SPI_MISO, SPI_MOSI, SPI_SCK);
 SX1262 radio = new Module(hal, RFM_NSS, RFM_DIO1, RFM_RST, RFM_BUSY);
 int transmissionState = RADIOLIB_ERR_NONE;
@@ -50,6 +54,23 @@ void setFlag(void)
     operationDone = true;
 }
 
+void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
+{
+
+    char* data = joy_to_bytes(last_joy);
+    state = radio.startTransmit(data);
+
+    
+
+
+}
+
+void joy_callback(sensor_msgs__msg__Joy joy_msg){
+    
+    last_joy = joy_msg;
+
+}
+
 const uint LED_PIN = 25;
 
 rcl_subscription_t joy_subscriber;
@@ -57,6 +78,28 @@ sensor_msgs__msg__Joy msg;
 
 int main()
 {
+    stdio_init_all();
+
+    hal->pinMode(RFM_RST, 1);      // output
+    hal->digitalWrite(RFM_RST, 1); // write high
+    hal->spiBegin();               // fix from https://github.com/jgromes/RadioLib/issues/729
+
+    state = radio.begin(FREQUENCY,
+                            BANDWIDTH,
+                            SPREADING_FACTOR,
+                            CODING_RATE,
+                            SYNC_WORD,
+                            OUTPUT_POWER,
+                            LORA_PREAMBLE_LEN,
+                            TCXO_VOLTAGE);
+    radio.setCurrentLimit(CURRENT_LIMIT);
+    radio.forceLDRO(LDRO);
+    radio.setCRC(CRC);
+    radio.invertIQ(IQINVERTED);
+    radio.setWhitening(true, WHITENING_INITIAL);
+    radio.explicitHeader();
+    radio.setDio1Action(setFlag);
+
     rmw_uros_set_custom_transport(
         true,
         NULL,
