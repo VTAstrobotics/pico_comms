@@ -2,7 +2,7 @@
 #include <string>
 #include "message_to_astro.hpp"
 
-char * joy_to_bytes(sensor_msgs__msg__Joy joy_msg)
+char *joy_to_bytes(sensor_msgs__msg__Joy joy_msg)
 {
 
     char *message_to_send = new char[10]; // Extra byte for null termination
@@ -62,10 +62,10 @@ signed char joy_to_char(float analog_value)
     return result;
 }
 
-void bytes_to_joy(sensor_msgs__msg__Joy* msg, uint8_t *bytes)
+void bytes_to_joy(sensor_msgs__msg__Joy *msg, uint8_t *bytes)
 {
 
-    //buttons
+    // buttons
     for (int i = 0; i < 8; i++)
     {
         msg->buttons.data[i] = (bytes[1] >> ((7) - i)) & 0x01;

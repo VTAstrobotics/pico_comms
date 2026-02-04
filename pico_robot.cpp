@@ -48,6 +48,7 @@ volatile bool operationDone = false;
 void setFlag(void)
 {
     operationDone = true;
+    // // printf("INTERRUPT\n");
 }
 
 const uint LED_PIN = 25;
@@ -67,6 +68,7 @@ int main()
 
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
+    stdio_init_all();
 
     rcl_timer_t timer;
     rcl_node_t node;
@@ -102,7 +104,6 @@ int main()
 
     gpio_put(LED_PIN, 1);
 
-    stdio_init_all();
     hal->pinMode(RFM_RST, 1);      // output
     hal->digitalWrite(RFM_RST, 1); // write high
     hal->spiBegin();               // fix from https://github.com/jgromes/RadioLib/issues/729
@@ -125,11 +126,11 @@ int main()
     state = radio.startReceive();
     if (state == RADIOLIB_ERR_NONE)
     {
-        printf("success!");
+        // printf("success!");
     }
     else
     {
-        printf("failed, code ");
+        // printf("failed, code ");
         while (true)
         {
             sleep_ms(10);
@@ -141,25 +142,26 @@ int main()
         if (operationDone)
         {
             operationDone = false;
-            uint8_t str[50];
-            int state = radio.readData(str, 50);
+            uint8_t str[11];
+            int state = radio.readData(str, 11);
 
             if (state == RADIOLIB_ERR_NONE)
             {
 
-                printf("[SX1262] Data:\t\t");
-                printf("%s \n", (char *)str);
-
+                // // printf("[SX1262] Data:\t\t");
+                // // printf("%s \n", (char *)str);
                 char command_code = str[0];
                 bytes_to_joy(&msg, str);
 
                 rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
             }
             hal->delay(1000);
-
             state = radio.startReceive();
+            // printf("LISTENING\n");
         }
-        rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
+        else
+            // printf("OPERATION INCOMPLETE\n");
+            rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
     }
     return 0;
 }
