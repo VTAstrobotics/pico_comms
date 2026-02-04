@@ -76,6 +76,14 @@ int main()
     rclc_support_t support;
     rclc_executor_t executor;
 
+    float axes_data[6];
+    int32_t buttons_data[15];
+
+    msg.axes.capacity = 6;
+    msg.axes.data = axes_data;
+    msg.buttons.capacity = 15;
+    msg.buttons.data = buttons_data;
+
     allocator = rcl_get_default_allocator();
 
     // Wait for agent successful ping for 2 minutes.
@@ -100,7 +108,6 @@ int main()
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, Joy),
         "/joy");
     rclc_executor_init(&executor, &support.context, 1, &allocator);
-    rclc_executor_add_timer(&executor, &timer);
 
     gpio_put(LED_PIN, 1);
 
@@ -122,6 +129,7 @@ int main()
     radio.invertIQ(IQINVERTED);
     radio.setWhitening(true, WHITENING_INITIAL);
     radio.explicitHeader();
+    radio.setDio1Action(setFlag);
 
     state = radio.startReceive();
     if (state == RADIOLIB_ERR_NONE)
@@ -155,7 +163,7 @@ int main()
 
                 rcl_ret_t ret = rcl_publish(&publisher, &msg, NULL);
             }
-            hal->delay(1000);
+            hal->delay(100);
             state = radio.startReceive();
             // printf("LISTENING\n");
         }
