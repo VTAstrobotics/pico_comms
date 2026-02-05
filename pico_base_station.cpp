@@ -27,6 +27,9 @@ extern "C"
 #include "pico_uart_transport.h"
 }
 
+#define NUM_AXES 8
+#define NUM_BUTTONS 20
+
 #define FREQUENCY 915.000   //
 #define BANDWIDTH 125.0     // Sets LoRa bandwidth. Allowed values are 7.8, 10.4, 15.6, 20.8, 31.25, 41.7, 62.5, 125.0, 250.0 and 500.0 kHz.
 #define SPREADING_FACTOR 7  // Sets LoRa spreading factor. Allowed values range from 5 to 12.
@@ -64,10 +67,18 @@ void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
     state = radio.startTransmit(data);
 }
 
-void joy_callback(sensor_msgs__msg__Joy joy_msg)
+void joy_callback(const void *msg)
 {
+    if (msg == NULL)
+    {
+        return;
+    }
 
-    last_joy = joy_msg;
+    // Cast the void pointer to the correct message type
+    const sensor_msgs__msg__Joy *joy_msg = (const sensor_msgs__msg__Joy *)msg;
+
+    // Copy the message safely
+    sensor_msgs__msg__Joy__copy(joy_msg, &last_joy);
 }
 
 const uint LED_PIN = 25;
@@ -75,18 +86,58 @@ const uint LED_PIN = 25;
 rcl_subscription_t joy_subscriber;
 sensor_msgs__msg__Joy msg;
 
+float last_joy_axes_storage[NUM_AXES];
+int32_t last_joy_buttons_storage[NUM_BUTTONS];
+
+float msg_axes_storage[NUM_AXES];
+int32_t msg_buttons_storage[NUM_BUTTONS];
+
+void init_joy_msgs_static()
+{
+    // Initialize messages
+    sensor_msgs__msg__Joy__init(&last_joy);
+    sensor_msgs__msg__Joy__init(&msg);
+
+    // Assign static storage for axes
+    last_joy.axes.data = last_joy_axes_storage;
+    last_joy.axes.size = NUM_AXES;
+    last_joy.axes.capacity = NUM_AXES;
+
+    msg.axes.data = msg_axes_storage;
+    msg.axes.size = NUM_AXES;
+    msg.axes.capacity = NUM_AXES;
+
+    // Assign static storage for buttons
+    last_joy.buttons.data = last_joy_buttons_storage;
+    last_joy.buttons.size = NUM_BUTTONS;
+    last_joy.buttons.capacity = NUM_BUTTONS;
+
+    msg.buttons.data = msg_buttons_storage;
+    msg.buttons.size = NUM_BUTTONS;
+    msg.buttons.capacity = NUM_BUTTONS;
+}
+
 int main()
 {
 
-    stdio_init_all();
+    // stdio_init_all();
+    rmw_uros_set_custom_transport(
+        true,
+        NULL,
+        pico_serial_transport_open,
+        pico_serial_transport_close,
+        pico_serial_transport_write,
+        pico_serial_transport_read);
 
-    while (!stdio_usb_connected()) {
-        gpio_put(LED_PIN, 1);
-        sleep_ms(50);
-        gpio_put(LED_PIN, 0);
-        sleep_ms(50);
-    }
-    
+    init_joy_msgs_static();
+
+    // while (!stdio_usb_connected()) {
+    //     gpio_put(LED_PIN, 1);
+    //     sleep_ms(50);
+    //     gpio_put(LED_PIN, 0);
+    //     sleep_ms(50);
+    // }
+
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
 
@@ -110,14 +161,6 @@ int main()
     radio.explicitHeader();
     radio.setDio1Action(setFlag);
 
-    rmw_uros_set_custom_transport(
-        true,
-        NULL,
-        pico_serial_transport_open,
-        pico_serial_transport_close,
-        pico_serial_transport_write,
-        pico_serial_transport_read);
-
     rcl_timer_t timer;
     rcl_node_t node;
     rcl_allocator_t allocator;
@@ -129,11 +172,10 @@ int main()
     // Wait for agent successful ping for 2 minutes.
     const int timeout_ms = 100;
     const uint8_t attempts = 1;
-    gpio_put(LED_PIN, 1);
+    gpio_put(LED_PIN, 0);
 
     rcl_ret_t ret = rmw_uros_ping_agent(timeout_ms, attempts);
     gpio_put(LED_PIN, 1);
-
 
     while (rmw_uros_ping_agent(timeout_ms, attempts) != RCL_RET_OK)
     {
@@ -154,7 +196,14 @@ int main()
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, Joy),
         "/joy");
 
-    rclc_executor_init(&executor, &support.context, 1, &allocator);
+    rclc_timer_init_default(
+        &timer,
+        &support,
+        RCL_MS_TO_NS(100),
+        timer_callback);
+
+    rclc_executor_init(&executor, &support.context, 12, &allocator);
+    rclc_executor_add_subscription(&executor, &joy_subscriber, &msg, joy_callback, ALWAYS);
     rclc_executor_add_timer(&executor, &timer);
 
     while (true)
