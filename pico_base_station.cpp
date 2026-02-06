@@ -64,7 +64,7 @@ void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
 {
 
     char *data = joy_to_bytes(last_joy);
-    state = radio.startTransmit(data, (size_t)12);
+    state = radio.startTransmit(data, (size_t)10);
 }
 
 void joy_callback(const void *msg)
