@@ -45,13 +45,13 @@ char* joy_to_bytes(sensor_msgs__msg__Joy joy_msg){
 signed char joy_to_char(float analog_value){
     signed char result;
     if(analog_value > 0){
-        result = analog_value * 127;
+        result = analog_value * 127.0;
     }
     else if(analog_value < 0){
-        result = analog_value * 128;
+        result = analog_value * 127.0;
     }
     else{
-        result = 0;
+        result = 1;
     }
 
     return result;

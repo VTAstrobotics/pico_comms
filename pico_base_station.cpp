@@ -6,6 +6,7 @@
 #include <rclc/executor.h>
 #include <std_msgs/msg/int32.h>
 #include <sensor_msgs/msg/joy.h>
+#include <std_msgs/msg/string.h>
 
 #include <RadioLib.h>
 #include "hal/RPiPico/PicoHal.h"
@@ -54,11 +55,13 @@ SX1262 radio = new Module(hal, RFM_NSS, RFM_DIO1, RFM_RST, RFM_BUSY);
 int transmissionState = RADIOLIB_ERR_NONE;
 bool transmitFlag = false;
 volatile bool operationDone = false;
+std_msgs__msg__String debug;
 
 void setFlag(void)
 {
     operationDone = true;
 }
+rcl_publisher_t debug_publisher;
 
 void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
 {
@@ -75,7 +78,14 @@ void joy_callback(const void *msg)
     }
 
     // Cast the void pointer to the correct message type
+    
     const sensor_msgs__msg__Joy *joy_msg = (const sensor_msgs__msg__Joy *)msg;
+
+    debug.data.size = 8;//strlen(8);
+    debug.data.capacity = 9;//strlen(data) + 1;
+    debug.data.data = joy_msg->axes.data[0];
+
+    rcl_publish(&debug_publisher, &debug, NULL);
 
     // Copy the message safely
     sensor_msgs__msg__Joy__copy(joy_msg, &last_joy);
@@ -91,6 +101,7 @@ int32_t last_joy_buttons_storage[NUM_BUTTONS];
 
 float msg_axes_storage[NUM_AXES];
 int32_t msg_buttons_storage[NUM_BUTTONS];
+char debug_characters[NUM_AXES];
 
 void init_joy_msgs_static()
 {
@@ -115,6 +126,9 @@ void init_joy_msgs_static()
     msg.buttons.data = msg_buttons_storage;
     msg.buttons.size = NUM_BUTTONS;
     msg.buttons.capacity = NUM_BUTTONS;
+
+
+    std_msgs__msg__String__init(&debug);
 }
 
 int main()
@@ -201,6 +215,14 @@ int main()
         &support,
         RCL_MS_TO_NS(100),
         timer_callback);
+
+    rclc_publisher_init_best_effort(
+        &debug_publisher,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, String),
+        "tx_debug"
+
+    );
 
     rclc_executor_init(&executor, &support.context, 12, &allocator);
     rclc_executor_add_subscription(&executor, &joy_subscriber, &msg, joy_callback, ALWAYS);
