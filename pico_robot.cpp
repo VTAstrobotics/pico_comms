@@ -68,7 +68,6 @@ int main()
 
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
-    stdio_init_all();
 
     rcl_timer_t timer;
     rcl_node_t node;
@@ -106,7 +105,8 @@ int main()
         &publisher,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, Joy),
-        "/joy");
+        "/joy_robot");
+
     rclc_executor_init(&executor, &support.context, 1, &allocator);
 
     gpio_put(LED_PIN, 1);
@@ -139,10 +139,6 @@ int main()
     else
     {
         // printf("failed, code ");
-        while (true)
-        {
-            sleep_ms(10);
-        }
     }
 
     while (true)
@@ -151,12 +147,11 @@ int main()
         if (operationDone)
         {
             operationDone = false;
-            uint8_t str[11];
-            int state = radio.readData(str, 11);
+            signed char str[10];
+            int state = radio.readData((uint8_t*) str, 10);
 
             if (state == RADIOLIB_ERR_NONE)
             {
-
                 // // printf("[SX1262] Data:\t\t");
                 // // printf("%s \n", (char *)str);
                 char command_code = str[0];

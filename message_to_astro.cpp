@@ -2,10 +2,9 @@
 #include <string>
 #include "message_to_astro.hpp"
 
-char *joy_to_bytes(sensor_msgs__msg__Joy joy_msg)
-{
+char* joy_to_bytes(sensor_msgs__msg__Joy joy_msg){
 
-    char *message_to_send = new char[10]; // Extra byte for null termination
+    char* message_to_send = new char[10];//Extra byte for null termination
 
     char command_code = 20;
     message_to_send[0] = command_code;
@@ -29,7 +28,7 @@ char *joy_to_bytes(sensor_msgs__msg__Joy joy_msg)
                    (joy_msg.buttons.data[13] << 2) |
                    (joy_msg.buttons.data[14] << 1) |
                    0;
-
+    
     message_to_send[2] = button2;
 
     message_to_send[3] = joy_to_char(joy_msg.axes.data[0]);
@@ -43,26 +42,22 @@ char *joy_to_bytes(sensor_msgs__msg__Joy joy_msg)
     return message_to_send;
 }
 
-signed char joy_to_char(float analog_value)
-{
+signed char joy_to_char(float analog_value){
     signed char result;
-    if (analog_value > 0)
-    {
+    if(analog_value > 0){
         result = analog_value * 127;
     }
-    else if (analog_value < 0)
-    {
+    else if(analog_value < 0){
         result = analog_value * 128;
     }
-    else
-    {
+    else{
         result = 0;
     }
 
     return result;
 }
 
-void bytes_to_joy(sensor_msgs__msg__Joy *msg, uint8_t *bytes)
+void bytes_to_joy(sensor_msgs__msg__Joy *msg, signed char *bytes)
 {
 
     msg->buttons.size = 15;
@@ -81,7 +76,7 @@ void bytes_to_joy(sensor_msgs__msg__Joy *msg, uint8_t *bytes)
     // axes
     for (int i = 0; i < 6; i++)
     {
-        int8_t raw_axis = (int8_t)bytes[i + 3];
+        signed char raw_axis = (signed char) bytes[i + 3];
 
         if (raw_axis >= 0)
         {

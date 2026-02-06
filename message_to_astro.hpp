@@ -8,4 +8,4 @@
 
 char *joy_to_bytes(sensor_msgs__msg__Joy joy_msg);
 signed char joy_to_char(float analog_value);
-void bytes_to_joy(sensor_msgs__msg__Joy *msg, uint8_t *bytes);
+void bytes_to_joy(sensor_msgs__msg__Joy *msg, signed char *bytes);
