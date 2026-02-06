@@ -2,9 +2,9 @@
 #include <string>
 #include "message_to_astro.hpp"
 
-char* joy_to_bytes(sensor_msgs__msg__Joy joy_msg){
+signed char* joy_to_bytes(sensor_msgs__msg__Joy joy_msg){
 
-    char* message_to_send = new char[10];//Extra byte for null termination
+    signed char* message_to_send = new signed char[10];//Extra byte for null termination
 
     char command_code = 20;
     message_to_send[0] = command_code;

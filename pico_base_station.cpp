@@ -66,8 +66,8 @@ rcl_publisher_t debug_publisher;
 void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
 {
 
-    char *data = joy_to_bytes(last_joy);
-    state = radio.startTransmit(data, (size_t)10);
+    signed char *data = joy_to_bytes(last_joy);
+    state = radio.startTransmit((uint8_t*)data, (size_t)10);
 }
 
 void joy_callback(const void *msg)
@@ -83,7 +83,7 @@ void joy_callback(const void *msg)
 
     debug.data.size = 8;//strlen(8);
     debug.data.capacity = 9;//strlen(data) + 1;
-    debug.data.data = joy_msg->axes.data[0];
+    // debug.data.data = joy_msg->axes.data[0];
 
     rcl_publish(&debug_publisher, &debug, NULL);
 
@@ -213,7 +213,7 @@ int main()
     rclc_timer_init_default(
         &timer,
         &support,
-        RCL_MS_TO_NS(100),
+        RCL_MS_TO_NS(50),
         timer_callback);
 
     rclc_publisher_init_best_effort(
@@ -230,7 +230,7 @@ int main()
 
     while (true)
     {
-        rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
+        rclc_executor_spin_some(&executor, RCL_MS_TO_NS(50));
     }
     return 0;
 }
