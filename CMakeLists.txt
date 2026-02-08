@@ -19,7 +19,7 @@ if (EXISTS ${picoVscode})
 endif()
 set(PICO_BOARD pico2 CACHE STRING "Board type")
 
-project(pico_base_station C CXX ASM)
+project(science C CXX ASM)
 
 include(pico_sdk_import.cmake)
 
@@ -32,8 +32,8 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/RadioLib")
 
 
 link_directories(libmicroros)
-add_executable(pico_base_station
-    pico_base_station.c
+add_executable(science
+    science.cpp
     pico_uart_transport.c
     pico_uart_transport.h
     "${CMAKE_CURRENT_SOURCE_DIR}/RadioLib/src/hal/RPiPico/PicoHal.cpp"
@@ -42,7 +42,7 @@ add_executable(pico_base_station
 
 
 
-target_link_libraries(pico_base_station
+target_link_libraries(science
     pico_stdlib
     microros
     RadioLib
@@ -53,7 +53,7 @@ target_link_libraries(pico_base_station
     hardware_pwm
 )
 
-target_include_directories(pico_base_station PUBLIC
+target_include_directories(science PUBLIC
     libmicroros/include
 )
 
@@ -63,11 +63,11 @@ SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -ffunction-sections -fdata-sections")
 SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -ffunction-sections -fdata-sections")
 
 # Configure Pico
-pico_enable_stdio_usb(pico_base_station 1)
-pico_enable_stdio_uart(pico_base_station 0)
+pico_enable_stdio_usb(science 1)
+pico_enable_stdio_uart(science 0)
 add_compile_definitions(PICO_UART_ENABLE_CRLF_SUPPORT=0)
 add_compile_definitions(PICO_STDIO_ENABLE_CRLF_SUPPORT=0)
 add_compile_definitions(PICO_STDIO_DEFAULT_CRLF=0)
 
 # Generate UF2
-pico_add_extra_outputs(pico_base_station)
+pico_add_extra_outputs(science)
