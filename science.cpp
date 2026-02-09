@@ -287,6 +287,8 @@ int main()
 
     rcl_publisher_t temperature_publisher;
     std_msgs__msg__Int32 temperature_msg;
+    rcl_publisher_t humidity_publisher;
+    std_msgs__msg__Int32 humidity_msg;
 
     rcl_allocator_t allocator;
     rclc_support_t support;
@@ -305,6 +307,9 @@ int main()
 
     rclc_support_init(&support, 0, NULL, &allocator);
     rclc_node_init_default(&node, "science_micronode", "", &support);
+
+    rclc_publisher_init_default(&humidity_publisher,&node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, humidity_msg, Float32), "humidity_publisher");
 
     rclc_publisher_init_default(
         &temperature_publisher,
@@ -344,6 +349,8 @@ int main()
 
 
             float h = read_humidity();
+            humidity_msg.data = h;
+            rcl_ret_t ret_hum = rcl_publish(&humidity_publisher, &humidity_msg, NULL);
 
             printf("Temp: %.2f C | Hum: %.2f %%\n", t, h);
             next_sensor_time = make_timeout_time_ms(SENSOR_PERIOD_MS);
