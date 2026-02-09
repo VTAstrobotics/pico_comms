@@ -2,8 +2,19 @@
 #include "pico/stdlib.h"
 #include "hardware/i2c.h"
 
+
+#include <rcl/rcl.h>
+#include <rcl/error_handling.h>
+#include <rclc/rclc.h>
+#include <rclc/executor.h>
+
 #include <std_msgs/msg/int32.h>
 #include <std_msgs/msg/float32.h>
+
+#include <rmw_microros/rmw_microros.h>
+
+
+
 
 // =====================================================
 // I2C (Soil / SHT20)
@@ -284,7 +295,7 @@ int main()
     pump_next_change = make_timeout_time_ms(1000);
     // heater_next_change = make_timeout_time_ms(1000);
     next_sensor_time = make_timeout_time_ms(SENSOR_PERIOD_MS);
-
+    rcl_node_t node;
     rcl_publisher_t temperature_publisher;
     std_msgs__msg__Float32 temperature_msg;
     rcl_publisher_t humidity_publisher;
@@ -309,12 +320,12 @@ int main()
     rclc_node_init_default(&node, "science_micronode", "", &support);
 
     rclc_publisher_init_default(&humidity_publisher,&node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, humidity_msg, Float32), "humidity_publisher");
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32), "humidity_publisher");
 
     rclc_publisher_init_default(
         &temperature_publisher,
         &node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, temperature_msg, Float32),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32),
         "/temperature_publisher");
 
     while (true)
