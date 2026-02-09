@@ -198,28 +198,28 @@ void pump_test_service(void)
     {
     case TEST_FWD:
         pump_set_mode(PUMP_FORWARD);
-        printf("PUMP: FORWARD\n");
+        // printf("PUMP: FORWARD\n");
         pump_test_state = TEST_COAST_1;
         pump_next_change = make_timeout_time_ms(5000);
         break;
 
     case TEST_COAST_1:
         pump_set_mode(PUMP_COAST);
-        printf("PUMP: COAST\n");
+        // printf("PUMP: COAST\n");
         pump_test_state = TEST_REV;
         pump_next_change = make_timeout_time_ms(1000);
         break;
 
     case TEST_REV:
         pump_set_mode(PUMP_REVERSE);
-        printf("PUMP: REVERSE\n");
+        // printf("PUMP: REVERSE\n");
         pump_test_state = TEST_COAST_2;
         pump_next_change = make_timeout_time_ms(5000);
         break;
 
     case TEST_COAST_2:
         pump_set_mode(PUMP_COAST);
-        printf("PUMP: COAST\n");
+        // printf("PUMP: COAST\n");
         pump_test_state = TEST_FWD;
         pump_next_change = make_timeout_time_ms(1000);
         break;
@@ -240,7 +240,7 @@ void pump_test_service(void)
 //     heater_test_on = !heater_test_on;
 //     heater_set(heater_test_on);
 
-//     printf("HEATER: %s\n", heater_test_on ? "ON" : "OFF");
+//     // printf("HEATER: %s\n", heater_test_on ? "ON" : "OFF");
 
 //     heater_next_change = make_timeout_time_ms(3000);
 // }
@@ -268,7 +268,7 @@ int main()
     stdio_init_all();
     sleep_ms(2000);
 
-    printf("Science PCB – FSM + Pump Test + Heater Test\n");
+    // printf("Science PCB – FSM + Pump Test + Heater Test\n");
 
     i2c_init(I2C_PORT, 100 * 1000);
     gpio_set_function(I2C_SDA, GPIO_FUNC_I2C);
@@ -352,7 +352,7 @@ int main()
             humidity_msg.data = h;
             rcl_ret_t ret_hum = rcl_publish(&humidity_publisher, &humidity_msg, NULL);
 
-            printf("Temp: %.2f C | Hum: %.2f %%\n", t, h);
+            // printf("Temp: %.2f C | Hum: %.2f %%\n", t, h);
             next_sensor_time = make_timeout_time_ms(SENSOR_PERIOD_MS);
             sys_state = SYS_IDLE;
             break;
