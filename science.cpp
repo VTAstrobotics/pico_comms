@@ -286,9 +286,9 @@ int main()
     next_sensor_time = make_timeout_time_ms(SENSOR_PERIOD_MS);
 
     rcl_publisher_t temperature_publisher;
-    std_msgs__msg__Int32 temperature_msg;
+    std_msgs__msg__Float32 temperature_msg;
     rcl_publisher_t humidity_publisher;
-    std_msgs__msg__Int32 humidity_msg;
+    std_msgs__msg__Float32 humidity_msg;
 
     rcl_allocator_t allocator;
     rclc_support_t support;
