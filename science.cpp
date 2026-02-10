@@ -2,7 +2,6 @@
 #include "pico/stdlib.h"
 #include "hardware/i2c.h"
 
-
 #include <rcl/rcl.h>
 #include <rcl/error_handling.h>
 #include <rclc/rclc.h>
@@ -12,9 +11,6 @@
 #include <std_msgs/msg/float32.h>
 
 #include <rmw_microros/rmw_microros.h>
-
-
-
 
 // =====================================================
 // I2C (Soil / SHT20)
@@ -274,6 +270,20 @@ static absolute_time_t next_sensor_time;
 // =====================================================
 // MAIN
 // =====================================================
+
+void stepper_callback(const void *msg)
+{
+    if (msg == NULL)
+    {
+        return;
+    }
+
+    std_msgs__msg__Int32 *stepper_msgs = (std_msgs__msg__Int32 *)msg;
+
+    // Cast the void pointer to the correct message type
+    int stepper_number = msg->data;
+}
+
 int main()
 {
     stdio_init_all();
@@ -301,6 +311,11 @@ int main()
     rcl_publisher_t humidity_publisher;
     std_msgs__msg__Float32 humidity_msg;
 
+
+    rcl_subscription_t stepper_subscriber;
+    std_msgs__msg__Int32 stepper_msg;
+    
+
     rcl_allocator_t allocator;
     rclc_support_t support;
     rclc_executor_t executor;
@@ -319,14 +334,24 @@ int main()
     rclc_support_init(&support, 0, NULL, &allocator);
     rclc_node_init_default(&node, "science_micronode", "", &support);
 
-    rclc_publisher_init_default(&humidity_publisher,&node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32), "humidity_publisher");
+    rclc_publisher_init_default(&humidity_publisher, &node,
+                                ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32), "humidity_publisher");
+
 
     rclc_publisher_init_default(
         &temperature_publisher,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32),
         "/temperature_publisher");
+
+    rclc_subscription_init_default(
+        &stepper_subscriber,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+        "/stepper_control");
+    
+    rclc_executor_add_subscription(&executor, &stepper_subscriber &stepper_msg, stepper_callback, ALWAYS);
+
 
     while (true)
     {
@@ -357,7 +382,6 @@ int main()
             float t = read_temperature();
             temperature_msg.data = t;
             rcl_ret_t ret = rcl_publish(&temperature_publisher, &temperature_msg, NULL);
-
 
             float h = read_humidity();
             humidity_msg.data = h;
