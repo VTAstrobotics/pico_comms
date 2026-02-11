@@ -271,17 +271,15 @@ static absolute_time_t next_sensor_time;
 // MAIN
 // =====================================================
 
-void stepper_callback(const void *msg)
+void stepper_callback(const void *msg_in)
 {
-    if (msg == NULL)
-    {
+    if (msg_in == NULL)
         return;
-    }
 
-    std_msgs__msg__Int32 *stepper_msgs = (std_msgs__msg__Int32 *)msg;
+    const std_msgs__msg__Int32 *msg = (const std_msgs__msg__Int32 *)msg_in;
 
-    // Cast the void pointer to the correct message type
     int stepper_number = msg->data;
+    current_state = (MotorState)stepper_number;
 }
 
 int main()
@@ -311,10 +309,8 @@ int main()
     rcl_publisher_t humidity_publisher;
     std_msgs__msg__Float32 humidity_msg;
 
-
     rcl_subscription_t stepper_subscriber;
     std_msgs__msg__Int32 stepper_msg;
-    
 
     rcl_allocator_t allocator;
     rclc_support_t support;
@@ -337,7 +333,6 @@ int main()
     rclc_publisher_init_default(&humidity_publisher, &node,
                                 ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32), "humidity_publisher");
 
-
     rclc_publisher_init_default(
         &temperature_publisher,
         &node,
@@ -349,9 +344,8 @@ int main()
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
         "/stepper_control");
-    
-    rclc_executor_add_subscription(&executor, &stepper_subscriber &stepper_msg, stepper_callback, ALWAYS);
 
+    rclc_executor_add_subscription(&executor, &stepper_subscriber, &stepper_msg, stepper_callback, ALWAYS);
 
     while (true)
     {
@@ -394,6 +388,7 @@ int main()
         }
         }
 
+        rclc_executor_spin_some(&executor, RCL_MS_TO_NS(50));
         sleep_ms(5);
     }
 }
