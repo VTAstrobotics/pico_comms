@@ -135,6 +135,16 @@ void init_heater(void)
     gpio_put(PIN_HEAT_SWITCH, 1); // OFF default (active LOW)
 }
 
+typedef enum
+{
+    HEATER_OFF = 0,
+    HEATER_ON,
+} HeaterState;
+
+HeaterState heater_state = HEATER_OFF;
+
+volatile bool heater_state_changed = false;
+
 void heater_set(bool on)
 {
     gpio_put(PIN_HEAT_SWITCH, on ? 0 : 1); // active LOW
@@ -237,20 +247,21 @@ void pump_test_service(void)
 // HEATER MOSFET TEST (TIME-BASED, NON-BLOCKING)
 // =====================================================
 // Pattern: ON 3s -> OFF 3s -> repeat
-// static bool heater_test_on = false;
-// static absolute_time_t heater_next_change;
+static bool heater_test_on = false;
+static absolute_time_t heater_next_change;
 
-// void heater_test_service(void) {
-//     if (absolute_time_diff_us(get_absolute_time(), heater_next_change) > 0)
-//         return;
+void heater_test_service(void)
+{
+    if (absolute_time_diff_us(get_absolute_time(), heater_next_change) > 0)
+        return;
 
-//     heater_test_on = !heater_test_on;
-//     heater_set(heater_test_on);
+    heater_test_on = !heater_test_on;
+    heater_set(heater_test_on);
 
-//     // printf("HEATER: %s\n", heater_test_on ? "ON" : "OFF");
+    // printf("HEATER: %s\n", heater_test_on ? "ON" : "OFF");
 
-//     heater_next_change = make_timeout_time_ms(3000);
-// }
+    heater_next_change = make_timeout_time_ms(3000);
+}
 //
 // =====================================================
 // SYSTEM FSM (sensors printing on schedule)
@@ -291,21 +302,21 @@ void pump_callback(const void *msg)
     const std_msgs__msg__Int32 *pump_msg = (const std_msgs__msg__Int32 *)msg;
     int pump_number = pump_msg->data;
 
-    pump_test_state = (PumpMode)pump_number;
-
+    pump_test_state = (PumpTestState)pump_number;
 }
 
-void heat_callback(const void *msg){
+void heat_callback(const void *msg)
 {
-    if (msg == NULL)
     {
-        return;
+        if (msg == NULL)
+        {
+            return;
+        }
+
+        const std_msgs__msg__Int32 *heat_msg = (const std_msgs__msg__Int32 *)msg;
+        int heat_number = heat_msg->data;
+        heater_state = (HeaterState)heat_number;
     }
-
-    std_msgs__msg__Int32 *pump_msgs = (std_msgs__msg__Int32 *)msg;
-    int pump_number = msg->data;
-}
-
 }
 
 int main()
@@ -405,6 +416,11 @@ int main()
         // run pump & heater test services
         pump_test_service();
         // heater_test_service();
+
+        if (heater_state == HEATER_ON)
+        { // on/off control for heater
+            heater_test_service();
+        }
 
         // sensor schedule
         switch (sys_state)
