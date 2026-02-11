@@ -284,6 +284,17 @@ void stepper_callback(const void *msg)
     int stepper_number = msg->data;
 }
 
+void pump_callback(const void *msg)
+{
+    if (msg == NULL)
+    {
+        return;
+    }
+    std_msgs__msg__Int32 *pump_msgs = (std_msgs__msg__Int32 *)msg;
+    int pump_number = msg->data;
+    
+}
+
 int main()
 {
     stdio_init_all();
@@ -311,11 +322,11 @@ int main()
     rcl_publisher_t humidity_publisher;
     std_msgs__msg__Float32 humidity_msg;
 
-
+    rcl_subscription_t pump_subscriber;
+    std_msgs__msg__Int32 pump_msg;
     rcl_subscription_t stepper_subscriber;
     std_msgs__msg__Int32 stepper_msg;
     
-
     rcl_allocator_t allocator;
     rclc_support_t support;
     rclc_executor_t executor;
@@ -333,10 +344,12 @@ int main()
 
     rclc_support_init(&support, 0, NULL, &allocator);
     rclc_node_init_default(&node, "science_micronode", "", &support);
-
-    rclc_publisher_init_default(&humidity_publisher, &node,
-                                ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32), "humidity_publisher");
-
+    
+    rclc_publisher_init_default(
+        &humidity_publisher,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32),
+        "humidity_publisher");
 
     rclc_publisher_init_default(
         &temperature_publisher,
@@ -349,7 +362,16 @@ int main()
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
         "/stepper_control");
-    
+
+    rclc_subscription_init_default(
+        &stepper_subscriber,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+        "/pump_control");
+
+        
+    rclc_executor_add_subscription(&executor, &pump_subscriber &pump_msg, pump_callback, ALWAYS);
+
     rclc_executor_add_subscription(&executor, &stepper_subscriber &stepper_msg, stepper_callback, ALWAYS);
 
 
