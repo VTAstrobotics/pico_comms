@@ -105,7 +105,7 @@ int main()
         &publisher,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, Joy),
-        "/joy_robot");
+        "/joy");
 
     rclc_executor_init(&executor, &support.context, 1, &allocator);
 

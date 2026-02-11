@@ -19,7 +19,7 @@ set(PICO_SDK_FETCH_FROM_GIT on)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
-set(PICO_BOARD pico2 CACHE STRING "Board type")
+set(PICO_BOARD pico CACHE STRING "Board type")
 
 
 include(pico_sdk_import.cmake)
