@@ -271,17 +271,15 @@ static absolute_time_t next_sensor_time;
 // MAIN
 // =====================================================
 
-void stepper_callback(const void *msg)
+void stepper_callback(const void *msg_in)
 {
-    if (msg == NULL)
-    {
+    if (msg_in == NULL)
         return;
-    }
 
-    std_msgs__msg__Int32 *stepper_msgs = (std_msgs__msg__Int32 *)msg;
+    const std_msgs__msg__Int32 *msg = (const std_msgs__msg__Int32 *)msg_in;
 
-    // Cast the void pointer to the correct message type
     int stepper_number = msg->data;
+    current_state = (MotorState)stepper_number;
 }
 
 void pump_callback(const void *msg)
@@ -416,6 +414,7 @@ int main()
         }
         }
 
+        rclc_executor_spin_some(&executor, RCL_MS_TO_NS(50));
         sleep_ms(5);
     }
 }
