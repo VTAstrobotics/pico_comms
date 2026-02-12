@@ -79,16 +79,13 @@ void on_uart_rx(void)
 }
 
 
-#define MAX_FIELDS 32
-#define FIELD_LEN 20
-
 void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavSatFix *msg)
 {
     char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0); // this is the array with the received string GPS data
 
     if (ready_to_publish)
     {
-        
+
 
 
         ready_to_publish = false;
