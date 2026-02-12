@@ -60,7 +60,7 @@ void on_uart_rx(void)
     {
         gps_char = uart_getc(UART_ID);
         received_gps_message = true;
-        if (i < (int)sizeof(gps_buffer_0) - 1) //prevent overflows
+        if (i < (int)sizeof(gps_buffer_0) - 1) // prevent overflows
         {
             gps_buffer_internal[i++] = gps_char;
         }
@@ -68,8 +68,6 @@ void on_uart_rx(void)
         {
             i = 0;
         }
-        received_gps_message = true;
-
         if (gps_char == '\n')
         {
             ready_to_publish = true;
@@ -80,16 +78,31 @@ void on_uart_rx(void)
     }
 }
 
+int parse_nmea_fields(char *line, char *fields[], int max_fields) //store character in array of pointers
+{
+    int n = 0;
+    char *tok = strtok(line, ",");          
+
+    while (tok && n < max_fields) {
+        fields[n++] = tok;                  
+        tok = strtok(NULL, ",");
+    }
+    return n;                              
+}
+
+
 void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavSatFix *msg)
-{ // TODO: change to navsatfix
+{
+
+    char fields_copy[100][8];
+
+    parse_nmea_fields()
+
+    char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0);
 
     if (ready_to_publish)
     {
         ready_to_publish = false;
-        if (buff_select)
-        {
-            buff_select_0
-        }
     }
 }
 
