@@ -11,6 +11,8 @@
 #include <std_msgs/msg/float32.h>
 
 #include <rmw_microros/rmw_microros.h>
+#include "pico_uart_transport.h"
+
 
 // =====================================================
 // I2C (Soil / SHT20)
@@ -322,6 +324,13 @@ void heat_callback(const void *msg)
 int main()
 {
     stdio_init_all();
+    rmw_uros_set_custom_transport(
+        true,
+        NULL,
+        pico_serial_transport_open,
+        pico_serial_transport_close,
+        pico_serial_transport_write,
+        pico_serial_transport_read);
     sleep_ms(2000);
 
     // printf("Science PCB – FSM + Pump Test + Heater Test\n");
@@ -408,6 +417,7 @@ int main()
 
     rclc_executor_add_subscription(&executor, &heat_subscriber, &heat_msg, heat_callback, ALWAYS);
 
+    rclc_executor_init(&executor, &support.context, 1, &allocator);
     while (true)
     {
         // keep stepper responsive
