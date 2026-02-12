@@ -377,6 +377,9 @@ int main()
     {
         return ret;
     }
+    gpio_init(25);
+    gpio_set_dir(25, GPIO_OUT);
+    gpio_put(25, 1);
 
     rclc_support_init(&support, 0, NULL, &allocator);
     rclc_node_init_default(&node, "science_micronode", "", &support);
