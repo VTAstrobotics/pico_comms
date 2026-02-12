@@ -78,35 +78,19 @@ void on_uart_rx(void)
     }
 }
 
-int parse_nmea_fields(char *line, char *fields[], int max_fields) // store character in array of pointers
-{
-    int n = 0;
-    char *tok = strtok(line, ",");
-
-    while (tok && n < max_fields)
-    {
-        fields[n++] = tok;
-        tok = strtok(NULL, ",");
-    }
-    return n;
-}
 
 #define MAX_FIELDS 32
 #define FIELD_LEN 20
 
-
 void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavSatFix *msg)
 {
-    char *gps_buffer_internal = (!buff_select) ? (gps_buffer_1) : (gps_buffer_0); // want the not currently written buffer
+    char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0); // this is the array with the received string GPS data
 
-    char fields_copy[MAX_FIELDS][FIELD_LEN];
-
-    int nf = parse_nmea_copy(gps_buffer_internal, fields_copy);
-
-    parse_nmea_fields() 
-
-        if (ready_to_publish)
+    if (ready_to_publish)
     {
+        
+
+
         ready_to_publish = false;
     }
 }
