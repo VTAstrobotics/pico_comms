@@ -6,9 +6,9 @@
 #include <rclc/executor.h>
 #include <std_msgs/msg/int32.h>
 #include <sensor_msgs/msg/joy.h>
+#include "hardware/uart.h"
 
-#include <RadioLib.h>
-#include "hal/RPiPico/PicoHal.h"
+// #include "hal/RPiPico/PicoHal.h"
 #include "hardware/spi.h"
 #include "hardware/timer.h"
 #include "hardware/clocks.h"
@@ -27,12 +27,31 @@ const uint LED_PIN = 25;
 rcl_publisher_t publisher;
 std_msgs__msg__Int32 msg;
 
+#define UART_ID uart0
+#define BAUD_RATE 115200
+#define DATA_BITS 8
+#define STOP_BITS 1
+#define PARITY    UART_PARITY_NONE
+
+//subject to change
+#define UART_TX_PIN 0
+#define UART_RX_PIN 1
+
 
 
 //need to have interrupt on UART message. After uart message is recieved, publish message
 
+void on_uart_rx() {
+    while (uart_is_readable(UART_ID)) {
+        uint8_t ch = uart_getc(UART_ID);
+        //publish here
+    }
+}
+
 int main()
 {
+
+    uart_init(UART_ID, 2400);
     rmw_uros_set_custom_transport(
 		true,
 		NULL,
