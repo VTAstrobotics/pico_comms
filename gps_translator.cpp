@@ -47,7 +47,7 @@ static volatile char gps_buffer_0[100];
 
 static volatile char gps_buffer_1[100];
 
-static volatile buff_select = 0;
+static volatile bool buff_select = 0;
 
 static int head = 0;
 
