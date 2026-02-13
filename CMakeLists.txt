@@ -47,7 +47,7 @@ pico_sdk_init()
 
 link_directories(libmicroros)
 add_executable(gps_translator
-    gps_translator.c
+    gps_translator.cpp
     pico_uart_transport.c
     pico_uart_transport.h
     # "${CMAKE_CURRENT_SOURCE_DIR}/RadioLib/src/hal/RPiPico/PicoHal.cpp"
