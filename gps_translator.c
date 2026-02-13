@@ -12,14 +12,13 @@
 #include "hardware/spi.h"
 #include "hardware/timer.h"
 #include "hardware/clocks.h"
-#include <string>
 
 #include <rmw_microros/rmw_microros.h>
 
 #include "pico/stdlib.h"
 #include "pico_uart_transport.h"
 #include <sensor_msgs/msg/nav_sat_fix.h>
-#include <vector>
+#include <string.h>
 
 const uint LED_PIN = 25;
 
@@ -39,21 +38,21 @@ sensor_msgs__msg__NavSatFix msg;
 // need to have interrupt on UART message. After uart message is recieved, publish message
 // circular buffer?
 
-static char gps_char;
-static bool received_gps_message = false;
-static bool ready_to_publish = false;
-static char gps_buffer_0[100];
+static volatile char gps_char;
+static volatile bool received_gps_message = false;
+static volatile bool ready_to_publish = false;
+static volatile char gps_buffer_0[100];
 
-static char gps_buffer_1[100];
+static volatile char gps_buffer_1[100];
 
-static bool buff_select = 0;
+static volatile bool buff_select = 0;
 
 static int head = 0;
 
-static float longitude;
-static float latitude;
-static float lat_direction;
-static float long_direction;
+static volatile float longitude;
+static volatile float latitude;
+static volatile float lat_direction;
+static volatile float long_direction;
 
 static const int LONG_FIELD = 4; // latitude value
 static const int LAT_FIELD = 2;  // longitude value
@@ -64,7 +63,7 @@ void on_uart_rx(void)
 {
     static int i = 0;
 
-     char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0);
+    volatile char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0);
 
     while (uart_is_readable(UART_ID))
     {
@@ -90,41 +89,30 @@ void on_uart_rx(void)
 
 void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavSatFix *msg)
 {
-     char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0); // this is the array with the received string GPS data
+    volatile char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0); // this is the array with the received string GPS data
 
     if (ready_to_publish)
     {
         std::vector<std::string> gps_fields;
-
+        // parse the GPS string in gps_buffer only if first string is $GPGGA
+        // extract field index 2 and 4, 3 for N/S, 5 for W/E
         const char *delimiter = ",";
+        // std::string gps0 = cpp_string(gps_buffer_0);
         std::string gps1(gps_buffer_internal);
+        char *gps_data = gps1.gps_fields.push_back(std::string(gps_fields)); // add GPS to vector then extract long and lat
 
-        
-        size_t start = 0;
-        while (true)
+        if (gps_fields[0] == "$GPGGA")
         {
-            size_t pos = gps1.find(delimiter, start);
-            if (pos == std::string::npos)
-            {
-                gps_fields.push_back(gps1.substr(start));
-                break;
-            }
-            gps_fields.push_back(gps1.substr(start, pos - start));
-            start = pos + 1;
-        }
 
-        if (gps_fields.size() > (size_t)LONG_DIR && gps_fields[0] == "$GPGGA")
-        {
-            latitude  = std::stof(gps_fields[LAT_FIELD]);
-            longitude = std::stof(gps_fields[LONG_FIELD]);
+            latitutde = gps_fields[LAT_FIELD];
+            longitude = gps_fields[LONG_FIELD];
+            lat_direction = gps_fields[LAT_DIR];
+            long_direction = gps_fields[LONG_DIR];
 
-            lat_direction  = (float)gps_fields[LAT_DIR][0];
-            long_direction = (float)gps_fields[LONG_DIR][0];
         }
         ready_to_publish = false;
     }
 }
-
 
 int main()
 {
@@ -139,7 +127,7 @@ int main()
     uart_set_hw_flow(UART_ID, false, false);
 
     uart_set_format(UART_ID, DATA_BITS, STOP_BITS, PARITY);
-    
+
     uart_set_fifo_enabled(UART_ID, false);
 
     // Set up a RX interrupt
@@ -159,21 +147,21 @@ int main()
         pico_serial_transport_close,
         pico_serial_transport_write,
         pico_serial_transport_read);
-    
+
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
-    
+
     rcl_node_t node;
     rcl_allocator_t allocator;
     rclc_support_t support;
     rclc_executor_t executor;
-    
+
     allocator = rcl_get_default_allocator();
-    
+
     // Wait for agent successful ping for 2 minutes.
     const int timeout_ms = 1000;
     const uint8_t attempts = 120;
-    
+
     rcl_ret_t ret = rmw_uros_ping_agent(timeout_ms, attempts);
 
     if (ret != RCL_RET_OK)
@@ -181,7 +169,6 @@ int main()
         // Unreachable agent, exiting program.
         return ret;
     }
-
     gpio_put(LED_PIN, 1);
 
     rclc_support_init(&support, 0, NULL, &allocator);
@@ -190,12 +177,11 @@ int main()
     rclc_publisher_init_default(
         &publisher,
         &node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, NavSatFix),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, sensor_msgs__msg__NavSatFix),
         "pico_publisher");
-    
+
     rclc_executor_init(&executor, &support.context, 1, &allocator);
-    
-    
+
     while (true)
     {
         rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
