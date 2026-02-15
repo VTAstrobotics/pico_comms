@@ -5,6 +5,7 @@
 #include <rclc/rclc.h>
 #include <rclc/executor.h>
 #include <std_msgs/msg/int32.h>
+#include <std_msgs/msg/float32.h>
 #include <sensor_msgs/msg/joy.h>
 #include "hardware/uart.h"
 
@@ -60,6 +61,8 @@ static const int LAT_FIELD = 2;  // longitude value
 static const int LAT_DIR = 3;    // N or S
 static const int LONG_DIR = 5;   // W or E
 
+
+
 void on_uart_rx(void)
 {
     static int i = 0;
@@ -87,6 +90,7 @@ void on_uart_rx(void)
         }
     }
 }
+
 
 void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavSatFix *msg)
 {
@@ -167,6 +171,11 @@ int main()
     rcl_allocator_t allocator;
     rclc_support_t support;
     rclc_executor_t executor;
+
+    rcl_publisher_t lat_publisher;
+    rcl_publisher_t lon_publisher;
+    sensor_msgs__msg__NavSatFix lat_msg;
+    sensor_msgs__msg__NavSatFix lon_msg;
     
     allocator = rcl_get_default_allocator();
     
@@ -183,6 +192,18 @@ int main()
     }
 
     gpio_put(LED_PIN, 1);
+
+    rclc_publisher_init_default(
+        &lat_publisher, 
+        &node, 
+        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, float),
+        "lat_publisher");
+
+    rclc_publisher_init_default(
+        &lon_publisher, 
+        &node, 
+        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, float),
+        "lon_publisher");
 
     rclc_support_init(&support, 0, NULL, &allocator);
 
