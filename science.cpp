@@ -104,7 +104,7 @@ void set_stepper_direction(bool dir)
 
 static uint32_t motor_steps_remaining = 0;
 #define MOTOR_TOTAL_STEPS 2000
-#define MOTOR_DELAY_US 200
+#define MOTOR_DELAY_US 50
 #define MOTOR_CHUNK 50
 
 void stepper_service_nonblocking(void)
@@ -383,6 +383,12 @@ int main()
 
     rclc_support_init(&support, 0, NULL, &allocator);
     rclc_node_init_default(&node, "science_micronode", "", &support);
+    
+    rclc_subscription_init_default(
+        &stepper_subscriber,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
+        "stepper_control");
 
     rclc_publisher_init_default(
         &humidity_publisher,
@@ -394,33 +400,33 @@ int main()
         &temperature_publisher,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Float32),
-        "/temperature_publisher");
-
-    rclc_subscription_init_default(
-        &stepper_subscriber,
-        &node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
-        "/stepper_control");
+        "temperature_publisher");
 
     rclc_subscription_init_default(
         &pump_subscriber,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
-        "/pump_control");
+        "pump_control");
 
     rclc_subscription_init_default(
         &heat_subscriber,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, Int32),
-        "/heater_control");
+        "heater_control");
 
-    rclc_executor_add_subscription(&executor, &pump_subscriber, &pump_msg, pump_callback, ALWAYS);
+    std_msgs__msg__Int32__init(&pump_msg);
+    std_msgs__msg__Int32__init(&stepper_msg);
+    std_msgs__msg__Int32__init(&heat_msg);
 
-    rclc_executor_add_subscription(&executor, &stepper_subscriber, &stepper_msg, stepper_callback, ALWAYS);
 
-    rclc_executor_add_subscription(&executor, &heat_subscriber, &heat_msg, heat_callback, ALWAYS);
+    rclc_executor_init(&executor, &support.context, 6, &allocator);
 
-    rclc_executor_init(&executor, &support.context, 1, &allocator);
+    rclc_executor_add_subscription(&executor, &pump_subscriber, &pump_msg, pump_callback, ON_NEW_DATA);
+
+    rclc_executor_add_subscription(&executor, &stepper_subscriber, &stepper_msg, stepper_callback, ON_NEW_DATA);
+
+    rclc_executor_add_subscription(&executor, &heat_subscriber, &heat_msg, heat_callback, ON_NEW_DATA);
+
     while (true)
     {
         // keep stepper responsive
@@ -460,7 +466,7 @@ int main()
             humidity_msg.data = h;
             rcl_ret_t ret_hum = rcl_publish(&humidity_publisher, &humidity_msg, NULL);
 
-            // printf("Temp: %.2f C | Hum: %.2f %%\n", t, h);
+            printf("Temp: %.2f C | Hum: %.2f %%\n", t, h);
             next_sensor_time = make_timeout_time_ms(SENSOR_PERIOD_MS);
             sys_state = SYS_IDLE;
             break;
