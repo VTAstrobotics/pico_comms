@@ -92,9 +92,51 @@ void on_uart_rx(void)
 }
 
 
+// void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavSatFix *msg)
+// {
+//      char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0); // this is the array with the received string GPS data
+
+//     if (ready_to_publish)
+//     {
+//         std::vector<std::string> gps_fields;
+
+//         const char *delimiter = ",";
+//         std::string gps1(gps_buffer_internal);
+
+        
+//         size_t start = 0;
+//         while (true)
+//         {
+//             size_t pos = gps1.find(delimiter, start);
+//             if (pos == std::string::npos)
+//             {
+//                 gps_fields.push_back(gps1.substr(start));
+//                 break;
+//             }
+//             gps_fields.push_back(gps1.substr(start, pos - start));
+//             start = pos + 1;
+//         }
+
+//         if (gps_fields.size() > (size_t)LONG_DIR && gps_fields[0] == "$GPGGA")
+//         {
+//             latitude  = std::stof(gps_fields[LAT_FIELD]);
+//             longitude = std::stof(gps_fields[LONG_FIELD]);
+
+//             lat_direction  = (float)gps_fields[LAT_DIR][0];
+//             long_direction = (float)gps_fields[LONG_DIR][0];
+//         }
+//         ready_to_publish = false;
+//     }
+// }
+
 void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavSatFix *msg)
 {
-     char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0); // this is the array with the received string GPS data
+    //In on_uart_rx, after a complete sentence is received, 
+    //buff_select is toggled with buff_select = !buff_select. 
+    //This means by the time handle_navsat_publishing runs, buff_select 
+    //is already pointing to the next buffer to write into,
+    //not the one that just finished. 
+    char *gps_buffer_internal = (!buff_select) ? (gps_buffer_1) : (gps_buffer_0); // flipped to get completed buffer
 
     if (ready_to_publish)
     {
@@ -103,7 +145,6 @@ void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavS
         const char *delimiter = ",";
         std::string gps1(gps_buffer_internal);
 
-        
         size_t start = 0;
         while (true)
         {
@@ -124,6 +165,11 @@ void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavS
 
             lat_direction  = (float)gps_fields[LAT_DIR][0];
             long_direction = (float)gps_fields[LONG_DIR][0];
+
+            msg->latitude  = latitude;
+            msg->longitude = longitude;
+
+            rcl_publish(publisher, msg, NULL);
         }
         ready_to_publish = false;
     }
