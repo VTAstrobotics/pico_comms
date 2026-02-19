@@ -131,7 +131,7 @@ void on_uart_rx(void)
 //     }
 // }
 
-void handle_navsat_publishing(rcl_publisher_t *lat_publisher, rcl_publisher_t *long_publisher, sensor_msgs__msg__NavSatFix *lat_msg, sensor_msgs__msg__NavSatFix *long_msg)
+void handle_navsat_publishing(rcl_publisher_t *lat_publisher, rcl_publisher_t *lon_publisher, sensor_msgs__msg__NavSatFix* lat_msg, sensor_msgs__msg__NavSatFix *lon_msg)
 {
     // In on_uart_rx, after a complete sentence is received,
     // buff_select is toggled with buff_select = !buff_select.
@@ -169,10 +169,10 @@ void handle_navsat_publishing(rcl_publisher_t *lat_publisher, rcl_publisher_t *l
             long_direction = (float)gps_fields[LONG_DIR][0];
 
             lat_msg->latitude = latitude;
-            long_msg->longitude = longitude;
+            lon_msg->longitude = longitude;
 
             rcl_ret_t lat_ret = rcl_publish(lat_publisher, lat_msg, NULL);
-            rcl_ret_t long_ret = rcl_publish(long_publisher, long_msg, NULL);
+            rcl_ret_t long_ret = rcl_publish(lon_publisher, lon_msg, NULL);
         }
         ready_to_publish = false;
     }
@@ -261,6 +261,10 @@ int main()
 
     while (true)
     {
+        if (ready_to_publish)
+        {
+            handle_navsat_publishing(&lat_publisher, &lon_publisher, &lat_msg, &lon_msg);
+        }
         rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
     }
     return 0;
