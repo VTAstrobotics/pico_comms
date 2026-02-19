@@ -169,7 +169,7 @@ void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavS
             msg->latitude  = latitude;
             msg->longitude = longitude;
 
-            rcl_publish(publisher, msg, NULL);
+            // rcl_publish(publisher, msg, NULL);
         }
         ready_to_publish = false;
     }
@@ -242,13 +242,13 @@ int main()
     rclc_publisher_init_default(
         &lat_publisher, 
         &node, 
-        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, float),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, NavSatFix),
         "lat_publisher");
 
     rclc_publisher_init_default(
         &lon_publisher, 
         &node, 
-        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, float),
+        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, NavSatFix),
         "lon_publisher");
 
     rclc_support_init(&support, 0, NULL, &allocator);
