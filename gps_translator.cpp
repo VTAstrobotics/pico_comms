@@ -61,13 +61,17 @@ static const int LAT_FIELD = 2;  // longitude value
 static const int LAT_DIR = 3;    // N or S
 static const int LONG_DIR = 5;   // W or E
 
+rcl_publisher_t lat_publisher;
+rcl_publisher_t lon_publisher;
 
+sensor_msgs__msg__NavSatFix lat_msg;
+sensor_msgs__msg__NavSatFix lon_msg;
 
 void on_uart_rx(void)
 {
     static int i = 0;
 
-     char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0);
+    char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0);
 
     while (uart_is_readable(UART_ID))
     {
@@ -91,7 +95,6 @@ void on_uart_rx(void)
     }
 }
 
-
 // void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavSatFix *msg)
 // {
 //      char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0); // this is the array with the received string GPS data
@@ -103,7 +106,6 @@ void on_uart_rx(void)
 //         const char *delimiter = ",";
 //         std::string gps1(gps_buffer_internal);
 
-        
 //         size_t start = 0;
 //         while (true)
 //         {
@@ -129,13 +131,13 @@ void on_uart_rx(void)
 //     }
 // }
 
-void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavSatFix *msg)
+void handle_navsat_publishing(rcl_publisher_t *lat_publisher, rcl_publisher_t *long_publisher, sensor_msgs__msg__NavSatFix *lat_msg, sensor_msgs__msg__NavSatFix *long_msg)
 {
-    //In on_uart_rx, after a complete sentence is received, 
-    //buff_select is toggled with buff_select = !buff_select. 
-    //This means by the time handle_navsat_publishing runs, buff_select 
-    //is already pointing to the next buffer to write into,
-    //not the one that just finished. 
+    // In on_uart_rx, after a complete sentence is received,
+    // buff_select is toggled with buff_select = !buff_select.
+    // This means by the time handle_navsat_publishing runs, buff_select
+    // is already pointing to the next buffer to write into,
+    // not the one that just finished.
     char *gps_buffer_internal = (!buff_select) ? (gps_buffer_1) : (gps_buffer_0); // flipped to get completed buffer
 
     if (ready_to_publish)
@@ -160,21 +162,21 @@ void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavS
 
         if (gps_fields.size() > (size_t)LONG_DIR && gps_fields[0] == "$GPGGA")
         {
-            latitude  = std::stof(gps_fields[LAT_FIELD]);
+            latitude = std::stof(gps_fields[LAT_FIELD]);
             longitude = std::stof(gps_fields[LONG_FIELD]);
 
-            lat_direction  = (float)gps_fields[LAT_DIR][0];
+            lat_direction = (float)gps_fields[LAT_DIR][0];
             long_direction = (float)gps_fields[LONG_DIR][0];
 
-            msg->latitude  = latitude;
-            msg->longitude = longitude;
+            lat_msg->latitude = latitude;
+            long_msg->longitude = longitude;
 
-            // rcl_publish(publisher, msg, NULL);
+            rcl_ret_t lat_ret = rcl_publish(lat_publisher, lat_msg, NULL);
+            rcl_ret_t long_ret = rcl_publish(long_publisher, long_msg, NULL);
         }
         ready_to_publish = false;
     }
 }
-
 
 int main()
 {
@@ -189,7 +191,7 @@ int main()
     uart_set_hw_flow(UART_ID, false, false);
 
     uart_set_format(UART_ID, DATA_BITS, STOP_BITS, PARITY);
-    
+
     uart_set_fifo_enabled(UART_ID, false);
 
     // Set up a RX interrupt
@@ -209,26 +211,21 @@ int main()
         pico_serial_transport_close,
         pico_serial_transport_write,
         pico_serial_transport_read);
-    
+
     gpio_init(LED_PIN);
     gpio_set_dir(LED_PIN, GPIO_OUT);
-    
+
     rcl_node_t node;
     rcl_allocator_t allocator;
     rclc_support_t support;
     rclc_executor_t executor;
 
-    rcl_publisher_t lat_publisher;
-    rcl_publisher_t lon_publisher;
-    sensor_msgs__msg__NavSatFix lat_msg;
-    sensor_msgs__msg__NavSatFix lon_msg;
-    
     allocator = rcl_get_default_allocator();
-    
+
     // Wait for agent successful ping for 2 minutes.
     const int timeout_ms = 1000;
     const uint8_t attempts = 120;
-    
+
     rcl_ret_t ret = rmw_uros_ping_agent(timeout_ms, attempts);
 
     if (ret != RCL_RET_OK)
@@ -240,14 +237,14 @@ int main()
     gpio_put(LED_PIN, 1);
 
     rclc_publisher_init_default(
-        &lat_publisher, 
-        &node, 
+        &lat_publisher,
+        &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, NavSatFix),
         "lat_publisher");
 
     rclc_publisher_init_default(
-        &lon_publisher, 
-        &node, 
+        &lon_publisher,
+        &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, NavSatFix),
         "lon_publisher");
 
@@ -259,10 +256,9 @@ int main()
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, NavSatFix),
         "pico_publisher");
-    
+
     rclc_executor_init(&executor, &support.context, 1, &allocator);
-    
-    
+
     while (true)
     {
         rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
