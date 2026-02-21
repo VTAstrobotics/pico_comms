@@ -7,7 +7,9 @@
 #include <std_msgs/msg/int32.h>
 #include <std_msgs/msg/float32.h>
 #include <sensor_msgs/msg/joy.h>
+#include <std_msgs/msg/string.h>
 #include "hardware/uart.h"
+#include <rosidl_runtime_c/string_functions.h>
 
 // #include "hal/RPiPico/PicoHal.h"
 #include "hardware/spi.h"
@@ -40,9 +42,9 @@ sensor_msgs__msg__NavSatFix msg;
 static char gps_char;
 static bool received_gps_message = false;
 static volatile bool ready_to_publish = false;
-static char gps_buffer_0[200];
+static char gps_buffer_0[150];
 
-static char gps_buffer_1[200];
+static char gps_buffer_1[150];
 
 static volatile bool buff_select = 0;
 
@@ -59,6 +61,9 @@ static const int LAT_DIR = 3;    // N or S
 static const int LONG_DIR = 5;   // W or E
 
 rcl_publisher_t navsat_publisher;
+rcl_publisher_t debug_publisher;
+std_msgs__msg__String debug;
+
 // rcl_publisher_t lon_publisher;
 
 // sensor_msgs__msg__NavSatFix lat_msg;
@@ -90,6 +95,8 @@ void on_uart_rx(void)
             buff_select = !buff_select;
         }
     }
+    rosidl_runtime_c__String__assign(&debug.data, "recieved char");
+    auto ret = rcl_publish(&debug_publisher, &debug, NULL);
 }
 
 static double nmea_to_decimal_degrees(double ddmm)
@@ -108,7 +115,7 @@ void handle_navsat_publishing()
 
     char *completed = (!buff_select) ? (gps_buffer_1) : (gps_buffer_0);
 
-    char local_line[200];
+    char local_line[150];
 
     int UART_IRQ = UART1_IRQ;
     irq_set_enabled(UART_IRQ, false);
@@ -161,6 +168,8 @@ void handle_navsat_publishing()
             (void)pub_ret;
         }
     }
+    rosidl_runtime_c__String__assign(&debug.data, "made it");
+    auto ret = rcl_publish(&debug_publisher, &debug, NULL);
 }
 
 int main()
@@ -233,6 +242,14 @@ int main()
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, NavSatFix),
         "navsat_publisher");
 
+    std_msgs__msg__String__init(&debug);
+
+    rclc_publisher_init_default(
+        &debug_publisher,
+        &node,
+        ROSIDL_GET_MSG_TYPE_SUPPORT(std_msgs, msg, String),
+        "debug_publisher");
+
     // rclc_publisher_init_default(
     //     &lon_publisher,
     //     &node,
@@ -253,6 +270,8 @@ int main()
         {
             handle_navsat_publishing();
         }
+        rosidl_runtime_c__String__assign(&debug.data, "main loop");
+        auto ret = rcl_publish(&debug_publisher, &debug, NULL);
         rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
     }
     return 0;
