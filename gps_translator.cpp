@@ -27,27 +27,24 @@ const uint LED_PIN = 25;
 rcl_publisher_t publisher;
 sensor_msgs__msg__NavSatFix msg;
 
-#define UART_ID uart0
+#define UART_ID uart1
 #define BAUD_RATE 38400
 #define DATA_BITS 8
 #define STOP_BITS 1
 #define PARITY UART_PARITY_NONE
 
 // subject to change
-#define UART_TX_PIN 0
-#define UART_RX_PIN 1
-
-// need to have interrupt on UART message. After uart message is recieved, publish message
-// circular buffer?
+#define UART_TX_PIN 8
+#define UART_RX_PIN 9
 
 static char gps_char;
 static bool received_gps_message = false;
-static bool ready_to_publish = false;
-static char gps_buffer_0[100];
+static volatile bool ready_to_publish = false;
+static char gps_buffer_0[200];
 
-static char gps_buffer_1[100];
+static char gps_buffer_1[200];
 
-static bool buff_select = 0;
+static volatile bool buff_select = 0;
 
 static int head = 0;
 
@@ -61,11 +58,11 @@ static const int LAT_FIELD = 2;  // longitude value
 static const int LAT_DIR = 3;    // N or S
 static const int LONG_DIR = 5;   // W or E
 
-rcl_publisher_t lat_publisher;
-rcl_publisher_t lon_publisher;
+rcl_publisher_t navsat_publisher;
+// rcl_publisher_t lon_publisher;
 
-sensor_msgs__msg__NavSatFix lat_msg;
-sensor_msgs__msg__NavSatFix lon_msg;
+// sensor_msgs__msg__NavSatFix lat_msg;
+sensor_msgs__msg__NavSatFix navsat_msg;
 
 void on_uart_rx(void)
 {
@@ -95,86 +92,74 @@ void on_uart_rx(void)
     }
 }
 
-// void handle_navsat_publishing(rcl_publisher_t *publisher, sensor_msgs__msg__NavSatFix *msg)
-// {
-//      char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0); // this is the array with the received string GPS data
-
-//     if (ready_to_publish)
-//     {
-//         std::vector<std::string> gps_fields;
-
-//         const char *delimiter = ",";
-//         std::string gps1(gps_buffer_internal);
-
-//         size_t start = 0;
-//         while (true)
-//         {
-//             size_t pos = gps1.find(delimiter, start);
-//             if (pos == std::string::npos)
-//             {
-//                 gps_fields.push_back(gps1.substr(start));
-//                 break;
-//             }
-//             gps_fields.push_back(gps1.substr(start, pos - start));
-//             start = pos + 1;
-//         }
-
-//         if (gps_fields.size() > (size_t)LONG_DIR && gps_fields[0] == "$GPGGA")
-//         {
-//             latitude  = std::stof(gps_fields[LAT_FIELD]);
-//             longitude = std::stof(gps_fields[LONG_FIELD]);
-
-//             lat_direction  = (float)gps_fields[LAT_DIR][0];
-//             long_direction = (float)gps_fields[LONG_DIR][0];
-//         }
-//         ready_to_publish = false;
-//     }
-// }
-
-void handle_navsat_publishing(rcl_publisher_t *lat_publisher, rcl_publisher_t *lon_publisher, sensor_msgs__msg__NavSatFix* lat_msg, sensor_msgs__msg__NavSatFix *lon_msg)
+static double nmea_to_decimal_degrees(double ddmm)
 {
-    // In on_uart_rx, after a complete sentence is received,
-    // buff_select is toggled with buff_select = !buff_select.
-    // This means by the time handle_navsat_publishing runs, buff_select
-    // is already pointing to the next buffer to write into,
-    // not the one that just finished.
-    char *gps_buffer_internal = (!buff_select) ? (gps_buffer_1) : (gps_buffer_0); // flipped to get completed buffer
+    int deg = (int)(ddmm / 100.0);
+    double minutes = ddmm - (deg * 100.0);
+    return (double)deg + (minutes / 60.0);
+}
 
-    if (ready_to_publish)
+void handle_navsat_publishing()
+{
+    if (!ready_to_publish)
     {
-        std::vector<std::string> gps_fields;
+        return;
+    }
 
-        const char *delimiter = ",";
-        std::string gps1(gps_buffer_internal);
+    char *completed = (!buff_select) ? (gps_buffer_1) : (gps_buffer_0);
 
-        size_t start = 0;
-        while (true)
+    char local_line[200];
+
+    int UART_IRQ = UART1_IRQ;
+    irq_set_enabled(UART_IRQ, false);
+    strncpy(local_line, completed, sizeof(local_line)); // turn off interrupt while copying
+    local_line[sizeof(local_line) - 1] = '\0';
+    ready_to_publish = false;
+    irq_set_enabled(UART_IRQ, true);
+
+    std::vector<std::string> gps_fields;
+
+    const char *delimiter = ",";
+    std::string gps1(local_line);
+
+    size_t start = 0;
+    while (true)
+    {
+        size_t pos = gps1.find(delimiter, start);
+        if (pos == std::string::npos)
         {
-            size_t pos = gps1.find(delimiter, start);
-            if (pos == std::string::npos)
-            {
-                gps_fields.push_back(gps1.substr(start));
-                break;
-            }
-            gps_fields.push_back(gps1.substr(start, pos - start));
-            start = pos + 1;
+            gps_fields.push_back(gps1.substr(start));
+            break;
         }
+        gps_fields.push_back(gps1.substr(start, pos - start));
+        start = pos + 1;
+    }
 
-        if (gps_fields.size() > (size_t)LONG_DIR && gps_fields[0] == "$GPGGA")
+    if (gps_fields.size() > (size_t)LONG_DIR && gps_fields[0] == "$GPGGA")
+    {
+        if (!gps_fields[LAT_FIELD].empty() && !gps_fields[LONG_FIELD].empty() &&
+            !gps_fields[LAT_DIR].empty() && !gps_fields[LONG_DIR].empty())
         {
-            latitude = std::stof(gps_fields[LAT_FIELD]);
-            longitude = std::stof(gps_fields[LONG_FIELD]);
+            double raw_lat = std::stod(gps_fields[LAT_FIELD]);
+            double raw_lon = std::stod(gps_fields[LONG_FIELD]);
 
-            lat_direction = (float)gps_fields[LAT_DIR][0];
-            long_direction = (float)gps_fields[LONG_DIR][0];
+            char ns = gps_fields[LAT_DIR][0];
+            char ew = gps_fields[LONG_DIR][0];
 
-            lat_msg->latitude = latitude;
-            lon_msg->longitude = longitude;
+            double lat_dd = nmea_to_decimal_degrees(raw_lat);
+            double lon_dd = nmea_to_decimal_degrees(raw_lon);
 
-            rcl_ret_t lat_ret = rcl_publish(lat_publisher, lat_msg, NULL);
-            rcl_ret_t long_ret = rcl_publish(lon_publisher, lon_msg, NULL);
+            if (ns == 'S')
+                lat_dd = -lat_dd;
+            if (ew == 'W')
+                lon_dd = -lon_dd;
+
+            navsat_msg.latitude = lat_dd;
+            navsat_msg.longitude = lon_dd;
+
+            rcl_ret_t pub_ret = rcl_publish(&navsat_publisher, &navsat_msg, NULL);
+            (void)pub_ret;
         }
-        ready_to_publish = false;
     }
 }
 
@@ -198,6 +183,7 @@ int main()
     int UART_IRQ = UART_ID == uart0 ? UART0_IRQ : UART1_IRQ;
 
     irq_set_exclusive_handler(UART_IRQ, on_uart_rx);
+
     irq_set_enabled(UART_IRQ, true);
 
     // Now enable the UART to send interrupts - RX only
@@ -222,6 +208,10 @@ int main()
 
     allocator = rcl_get_default_allocator();
 
+    rclc_support_init(&support, 0, NULL, &allocator);
+
+    rclc_node_init_default(&node, "pico_node", "", &support);
+
     // Wait for agent successful ping for 2 minutes.
     const int timeout_ms = 1000;
     const uint8_t attempts = 120;
@@ -236,21 +226,19 @@ int main()
 
     gpio_put(LED_PIN, 1);
 
+    sensor_msgs__msg__NavSatFix__init(&navsat_msg);
     rclc_publisher_init_default(
-        &lat_publisher,
+        &navsat_publisher,
         &node,
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, NavSatFix),
-        "lat_publisher");
+        "navsat_publisher");
 
-    rclc_publisher_init_default(
-        &lon_publisher,
-        &node,
-        ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, NavSatFix),
-        "lon_publisher");
+    // rclc_publisher_init_default(
+    //     &lon_publisher,
+    //     &node,
+    //     ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, NavSatFix),
+    //     "lon_publisher");
 
-    rclc_support_init(&support, 0, NULL, &allocator);
-
-    rclc_node_init_default(&node, "pico_node", "", &support);
     rclc_publisher_init_default(
         &publisher,
         &node,
@@ -263,7 +251,7 @@ int main()
     {
         if (ready_to_publish)
         {
-            handle_navsat_publishing(&lat_publisher, &lon_publisher, &lat_msg, &lon_msg);
+            handle_navsat_publishing();
         }
         rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
     }
