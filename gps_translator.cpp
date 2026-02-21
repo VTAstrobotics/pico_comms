@@ -69,34 +69,33 @@ std_msgs__msg__String debug;
 // sensor_msgs__msg__NavSatFix lat_msg;
 sensor_msgs__msg__NavSatFix navsat_msg;
 
+static volatile uint32_t isr_bytes = 0;
+static volatile uint32_t isr_lines = 0;
+
 void on_uart_rx(void)
 {
     static int i = 0;
-
-    char *gps_buffer_internal = (buff_select) ? (gps_buffer_1) : (gps_buffer_0);
+    char *gps_buffer_internal = (buff_select) ? gps_buffer_1 : gps_buffer_0;
 
     while (uart_is_readable(UART_ID))
     {
-        gps_char = uart_getc(UART_ID);
-        received_gps_message = true;
-        if (i < (int)sizeof(gps_buffer_0) - 1) // prevent overflows
-        {
-            gps_buffer_internal[i++] = gps_char;
-        }
+        char c = uart_getc(UART_ID);
+        isr_bytes++;
+
+        if (i < (int)sizeof(gps_buffer_0) - 1)
+            gps_buffer_internal[i++] = c;
         else
-        {
             i = 0;
-        }
-        if (gps_char == '\n')
+
+        if (c == '\n')
         {
-            ready_to_publish = true;
             gps_buffer_internal[i] = '\0';
             i = 0;
+            isr_lines++;
+            ready_to_publish = true;
             buff_select = !buff_select;
         }
     }
-    rosidl_runtime_c__String__assign(&debug.data, "recieved char");
-    auto ret = rcl_publish(&debug_publisher, &debug, NULL);
 }
 
 static double nmea_to_decimal_degrees(double ddmm)
