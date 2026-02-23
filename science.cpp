@@ -12,6 +12,8 @@
 
 #include <rmw_microros/rmw_microros.h>
 #include "pico_uart_transport.h"
+#include <hardware/pwm.h>
+#include <hardware/clocks.h>
 
 
 // =====================================================
@@ -104,7 +106,7 @@ void set_stepper_direction(bool dir)
 
 static uint32_t motor_steps_remaining = 0;
 #define MOTOR_TOTAL_STEPS 2000
-#define MOTOR_DELAY_US 50
+#define MOTOR_DELAY_US 350
 #define MOTOR_CHUNK 50
 
 void stepper_service_nonblocking(void)
@@ -129,12 +131,22 @@ void stepper_service_nonblocking(void)
 // HEATER (MOSFET)  -- active LOW control pin
 // =====================================================
 #define PIN_HEAT_SWITCH 10
+#define pwm_freq 50 // 50Hz for servos
+#define pwm_wrap 65535 // 16-bit resolution
 
 void init_heater(void)
 {
-    gpio_init(PIN_HEAT_SWITCH);
-    gpio_set_dir(PIN_HEAT_SWITCH, GPIO_OUT);
-    gpio_put(PIN_HEAT_SWITCH, 1); // OFF default (active LOW)
+    //use a spark max
+    uint32_t sys_clock_hz = clock_get_hz(clk_sys);
+
+    gpio_set_function(10, GPIO_FUNC_PWM);
+        uint slice_num = pwm_gpio_to_slice_num(10);
+        pwm_set_wrap(slice_num, pwm_wrap);
+        pwm_set_clkdiv(slice_num, sys_clock_hz / (pwm_freq * (pwm_wrap + 1))); 
+        pwm_set_enabled(slice_num, true);
+    // gpio_init(PIN_HEAT_SWITCH);
+    // gpio_set_dir(PIN_HEAT_SWITCH, GPIO_OUT);
+    // gpio_put(PIN_HEAT_SWITCH, 1); // OFF default (active LOW)
 }
 
 typedef enum
@@ -149,7 +161,18 @@ volatile bool heater_state_changed = false;
 
 void heater_set(bool on)
 {
-    gpio_put(PIN_HEAT_SWITCH, on ? 0 : 1); // active LOW
+    if(on){
+        uint slice_num = pwm_gpio_to_slice_num(PIN_HEAT_SWITCH);
+        uint16_t level = static_cast<uint16_t>(0.6f * pwm_wrap);
+        pwm_set_chan_level(slice_num, pwm_gpio_to_channel(PIN_HEAT_SWITCH), level);
+    }
+    else{
+
+        uint slice_num = pwm_gpio_to_slice_num(PIN_HEAT_SWITCH);
+        uint16_t level = static_cast<uint16_t>(0.5f * pwm_wrap);
+        pwm_set_chan_level(slice_num, pwm_gpio_to_channel(PIN_HEAT_SWITCH), level);
+
+    }
 }
 
 // =====================================================
@@ -252,12 +275,12 @@ void pump_test_service(void)
 static bool heater_test_on = false;
 static absolute_time_t heater_next_change;
 
-void heater_test_service(void)
+void heater_test_service(bool on)
 {
     if (absolute_time_diff_us(get_absolute_time(), heater_next_change) > 0)
         return;
 
-    heater_test_on = !heater_test_on;
+    heater_test_on = !on;
     heater_set(heater_test_on);
 
     // printf("HEATER: %s\n", heater_test_on ? "ON" : "OFF");
@@ -438,7 +461,11 @@ int main()
 
         if (heater_state == HEATER_ON)
         { // on/off control for heater
-            heater_test_service();
+            heater_test_service(true);
+        }
+        else{
+            heater_test_service(false);
+
         }
 
         // sensor schedule
@@ -466,14 +493,13 @@ int main()
             humidity_msg.data = h;
             rcl_ret_t ret_hum = rcl_publish(&humidity_publisher, &humidity_msg, NULL);
 
-            printf("Temp: %.2f C | Hum: %.2f %%\n", t, h);
+            // printf("Temp: %.2f C | Hum: %.2f %%\n", t, h);
             next_sensor_time = make_timeout_time_ms(SENSOR_PERIOD_MS);
             sys_state = SYS_IDLE;
             break;
         }
         }
 
-        rclc_executor_spin_some(&executor, RCL_MS_TO_NS(50));
-        sleep_ms(5);
+        rclc_executor_spin_some(&executor, RCL_MS_TO_NS(40));
     }
 }
