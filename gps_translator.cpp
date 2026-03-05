@@ -63,6 +63,7 @@ static const int LONG_DIR = 5;   // W or E
 rcl_publisher_t navsat_publisher;
 rcl_publisher_t debug_publisher;
 std_msgs__msg__String debug;
+std_msgs__msg__String uart_string;
 
 // rcl_publisher_t lon_publisher;
 
@@ -87,13 +88,15 @@ void on_uart_rx(void)
         else
             i = 0;
 
-        if (c == '\n')
+        if (c == '\n') // never getting here
         {
             gps_buffer_internal[i] = '\0';
             i = 0;
             isr_lines++;
             ready_to_publish = true;
             buff_select = !buff_select;
+            rosidl_runtime_c__String__assign(&uart_string.data, "uart rx");
+            auto ret = rcl_publish(&debug_publisher, &uart_string, NULL);
         }
     }
 }
@@ -242,6 +245,7 @@ int main()
         "navsat_publisher");
 
     std_msgs__msg__String__init(&debug);
+    std_msgs__msg__String__init(&uart_string);
 
     rclc_publisher_init_default(
         &debug_publisher,
