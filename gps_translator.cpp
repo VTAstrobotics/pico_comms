@@ -24,6 +24,10 @@
 #include <sensor_msgs/msg/nav_sat_fix.h>
 #include <vector>
 
+
+//TODO: remove microros publishing and custom transport
+// just flicker LED on recieve to see if the issue is due to overlapping w/ ros and uart
+
 const uint LED_PIN = 25;
 
 rcl_publisher_t publisher;
