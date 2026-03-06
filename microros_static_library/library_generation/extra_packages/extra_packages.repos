@@ -3,3 +3,6 @@ repositories:
     type: git
     url: https://github.com/ros-controls/control_msgs
     version: humble
+  
+  science_msgs
+    tp

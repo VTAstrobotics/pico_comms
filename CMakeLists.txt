@@ -34,7 +34,7 @@ endif()
 set(PICO_BOARD pico2 CACHE STRING "Board type")
 include(pico_sdk_import.cmake)
 
-project(science C CXX ASM)
+project(imu C CXX ASM)
 
 
 
@@ -47,17 +47,17 @@ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/RadioLib")
 
 
 link_directories(libmicroros)
-add_executable(science
-    science.cpp
+add_executable(imu
+    imu.cpp
+    bno055.cpp
     pico_uart_transport.c
     pico_uart_transport.h
     "${CMAKE_CURRENT_SOURCE_DIR}/RadioLib/src/hal/RPiPico/PicoHal.cpp"
-
 )
 
 
 
-target_link_libraries(science
+target_link_libraries(imu
     pico_stdlib
     microros
     RadioLib
@@ -69,7 +69,7 @@ target_link_libraries(science
     hardware_pwm
 )
 
-target_include_directories(science PUBLIC
+target_include_directories(imu PUBLIC
     libmicroros/include
 )
 
@@ -79,11 +79,11 @@ SET(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -ffunction-sections -fdata-sections")
 SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -ffunction-sections -fdata-sections")
 
 # Configure Pico
-pico_enable_stdio_usb(science 1)
-pico_enable_stdio_uart(science 0)
+pico_enable_stdio_usb(imu 1)
+pico_enable_stdio_uart(imu 0)
 add_compile_definitions(PICO_UART_ENABLE_CRLF_SUPPORT=0)
 add_compile_definitions(PICO_STDIO_ENABLE_CRLF_SUPPORT=0)
 add_compile_definitions(PICO_STDIO_DEFAULT_CRLF=0)
 
 # Generate UF2
-pico_add_extra_outputs(science)
+pico_add_extra_outputs(imu)

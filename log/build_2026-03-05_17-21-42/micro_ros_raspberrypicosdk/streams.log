@@ -1,0 +1,13 @@
+[0.010s] Invoking command in '/home/ryanjeronimus/github/pico_comms/build/micro_ros_raspberrypicosdk': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /home/ryanjeronimus/.pico-sdk/cmake/v3.31.5/bin/cmake --build /home/ryanjeronimus/github/pico_comms/build/micro_ros_raspberrypicosdk -- -j16 -l16
+[0.036s] [  1%] Built target bs2_default
+[0.045s] [ 41%] Built target RadioLib
+[0.045s] [ 42%] Built target bs2_default_library
+[0.069s] [ 42%] [32mBuilding CXX object CMakeFiles/science.dir/science.cpp.o[0m
+[0.152s] [01m[K/home/ryanjeronimus/github/pico_comms/science.cpp:16:10:[m[K [01;31m[Kfatal error: [m[Kscience_msgs/msg/Controls.h: No such file or directory
+[0.152s]    16 | #include [01;31m[K<science_msgs/msg/Controls.h>[m[K
+[0.152s]       |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[0.152s] compilation terminated.
+[0.163s] gmake[2]: *** [CMakeFiles/science.dir/build.make:79: CMakeFiles/science.dir/science.cpp.o] Error 1
+[0.163s] gmake[1]: *** [CMakeFiles/Makefile2:2441: CMakeFiles/science.dir/all] Error 2
+[0.164s] gmake: *** [Makefile:136: all] Error 2
+[0.165s] Invoked command in '/home/ryanjeronimus/github/pico_comms/build/micro_ros_raspberrypicosdk' returned '2': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /home/ryanjeronimus/.pico-sdk/cmake/v3.31.5/bin/cmake --build /home/ryanjeronimus/github/pico_comms/build/micro_ros_raspberrypicosdk -- -j16 -l16

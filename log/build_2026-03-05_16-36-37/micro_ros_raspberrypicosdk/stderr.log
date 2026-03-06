@@ -1,0 +1,560 @@
+[0mUsing master as default value for PICO_SDK_FETCH_FROM_GIT_TAG[0m
+[0mPICO_SDK_PATH is /home/ryanjeronimus/.pico-sdk/sdk/2.2.0[0m
+[0mTarget board (PICO_BOARD) is 'pico2'.[0m
+[0mUsing board configuration from /home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/boards/include/boards/pico2.h[0m
+[0mAuto-converting non-specific PICO_PLATFORM='rp2350' to 'rp2350-arm-s'[0m
+[0mDefaulting platform (PICO_PLATFORM) to 'rp2350-arm-s' based on PICO_BOARD setting.[0m
+[0mDefaulting compiler (PICO_COMPILER) to 'pico_arm_cortex_m33_gcc' since not specified.[0m
+[0mConfiguring toolchain based on PICO_COMPILER 'pico_arm_cortex_m33_gcc'[0m
+[0mDefaulting PICO_GCC_TRIPLE to 'arm-none-eabi'[0m
+[0mBuild type is Release[0m
+[0mUsing picotool from /home/ryanjeronimus/.pico-sdk/picotool/2.2.0-a4/picotool/picotool[0m
+[0mTinyUSB available at /home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/hw/bsp/rp2040; enabling build support for USB.[0m
+[0mBTstack available at /home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/btstack[0m
+[0mcyw43-driver available at /home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/cyw43-driver[0m
+[0mmbedtls available at /home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/mbedtls[0m
+[0mlwIP available at /home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/lwip[0m
+[33mCMake Warning:
+  Manually-specified variables were not used by the project:
+
+    CATKIN_INSTALL_INTO_PREFIX_ROOT
+
+[0m
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kvoid Module::[01;32m[KSPIreadRegisterBurst[m[K(uint32_t, size_t, uint8_t*)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:118:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  118 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:115:13:[m[K [01;36m[Knote: [m[Kat offset 6 into destination object '[01m[Kcmd[m[K' of size 6
+  115 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:118:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  118 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:115:13:[m[K [01;36m[Knote: [m[Kat offset 7 into destination object '[01m[Kcmd[m[K' of size 6
+  115 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:118:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  118 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:115:13:[m[K [01;36m[Knote: [m[Kat offset 8 into destination object '[01m[Kcmd[m[K' of size 6
+  115 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:118:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  118 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:115:13:[m[K [01;36m[Knote: [m[Kat offset 9 into destination object '[01m[Kcmd[m[K' of size 6
+  115 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:118:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  118 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:115:13:[m[K [01;36m[Knote: [m[Kat offset 10 into destination object '[01m[Kcmd[m[K' of size 6
+  115 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:118:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  118 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:115:13:[m[K [01;36m[Knote: [m[Kat offset 11 into destination object '[01m[Kcmd[m[K' of size 6
+  115 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:118:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  118 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:115:13:[m[K [01;36m[Knote: [m[Kat offset 12 into destination object '[01m[Kcmd[m[K' of size 6
+  115 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:118:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  118 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:115:13:[m[K [01;36m[Knote: [m[Kat offset 13 into destination object '[01m[Kcmd[m[K' of size 6
+  115 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:118:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  118 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:115:13:[m[K [01;36m[Knote: [m[Kat offset 14 into destination object '[01m[Kcmd[m[K' of size 6
+  115 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kuint8_t Module::[01;32m[KSPIreadRegister[m[K(uint32_t)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 6 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 7 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 8 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 9 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 10 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 11 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 12 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 13 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 14 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kvoid Module::[01;32m[KSPIwriteRegisterBurst[m[K(uint32_t, const uint8_t*, size_t)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:152:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  152 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:149:13:[m[K [01;36m[Knote: [m[Kat offset 6 into destination object '[01m[Kcmd[m[K' of size 6
+  149 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:152:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  152 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:149:13:[m[K [01;36m[Knote: [m[Kat offset 7 into destination object '[01m[Kcmd[m[K' of size 6
+  149 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:152:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  152 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:149:13:[m[K [01;36m[Knote: [m[Kat offset 8 into destination object '[01m[Kcmd[m[K' of size 6
+  149 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:152:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  152 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:149:13:[m[K [01;36m[Knote: [m[Kat offset 9 into destination object '[01m[Kcmd[m[K' of size 6
+  149 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:152:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  152 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:149:13:[m[K [01;36m[Knote: [m[Kat offset 10 into destination object '[01m[Kcmd[m[K' of size 6
+  149 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:152:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  152 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:149:13:[m[K [01;36m[Knote: [m[Kat offset 11 into destination object '[01m[Kcmd[m[K' of size 6
+  149 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:152:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  152 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:149:13:[m[K [01;36m[Knote: [m[Kat offset 12 into destination object '[01m[Kcmd[m[K' of size 6
+  149 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:152:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  152 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:149:13:[m[K [01;36m[Knote: [m[Kat offset 13 into destination object '[01m[Kcmd[m[K' of size 6
+  149 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:152:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  152 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:149:13:[m[K [01;36m[Knote: [m[Kat offset 14 into destination object '[01m[Kcmd[m[K' of size 6
+  149 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kvoid Module::[01;32m[KSPIwriteRegister[m[K(uint32_t, uint8_t)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:168:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  168 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:165:13:[m[K [01;36m[Knote: [m[Kat offset 6 into destination object '[01m[Kcmd[m[K' of size 6
+  165 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:168:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  168 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:165:13:[m[K [01;36m[Knote: [m[Kat offset 7 into destination object '[01m[Kcmd[m[K' of size 6
+  165 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:168:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  168 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:165:13:[m[K [01;36m[Knote: [m[Kat offset 8 into destination object '[01m[Kcmd[m[K' of size 6
+  165 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:168:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  168 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:165:13:[m[K [01;36m[Knote: [m[Kat offset 9 into destination object '[01m[Kcmd[m[K' of size 6
+  165 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:168:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  168 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:165:13:[m[K [01;36m[Knote: [m[Kat offset 10 into destination object '[01m[Kcmd[m[K' of size 6
+  165 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:168:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  168 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:165:13:[m[K [01;36m[Knote: [m[Kat offset 11 into destination object '[01m[Kcmd[m[K' of size 6
+  165 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:168:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  168 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:165:13:[m[K [01;36m[Knote: [m[Kat offset 12 into destination object '[01m[Kcmd[m[K' of size 6
+  165 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:168:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  168 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:165:13:[m[K [01;36m[Knote: [m[Kat offset 13 into destination object '[01m[Kcmd[m[K' of size 6
+  165 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:168:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  168 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_WRITE] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:165:13:[m[K [01;36m[Knote: [m[Kat offset 14 into destination object '[01m[Kcmd[m[K' of size 6
+  165 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kint16_t Module::[01;32m[KSPIcheckStream[m[K()[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 2 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 3 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 4 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 5 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 6 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 7 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 8 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 9 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 10 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 11 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 12 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 13 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:304:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  304 |     [01;35m[K*(cmdPtr++) = ( this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_STATUS] >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:301:11:[m[K [01;36m[Knote: [m[Kat offset 14 into destination object '[01m[KcmdBuf[m[K' of size 2
+  301 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kint16_t Module::[01;32m[KSPIwriteStream[m[K(uint16_t, const uint8_t*, size_t, bool, bool)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 2 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 3 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 4 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 5 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 6 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 7 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 8 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 9 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 10 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 11 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 12 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 13 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:271:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  271 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:268:11:[m[K [01;36m[Knote: [m[Kat offset 14 into destination object '[01m[KcmdBuf[m[K' of size 2
+  268 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kint16_t Module::[01;32m[KSPIreadStream[m[K(uint16_t, uint8_t*, size_t, bool, bool)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 2 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 3 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 4 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 5 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 6 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 7 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 8 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 9 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 10 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 11 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 12 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 13 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:243:17:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  243 |     [01;35m[K*(cmdPtr++) = (cmd >> 8*i) & 0xFF[m[K;
+      |     [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:240:11:[m[K [01;36m[Knote: [m[Kat offset 14 into destination object '[01m[KcmdBuf[m[K' of size 2
+  240 |   uint8_t [01;36m[KcmdBuf[m[K[2];
+      |           [01;36m[K^~~~~~[m[K
+In member function '[01m[Kuint8_t Module::[01;32m[KSPIreadRegister[m[K(uint32_t)[m[K',
+    inlined from '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K' at [01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:85:36[m[K:
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 6 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+In member function '[01m[Kuint8_t Module::[01;32m[KSPIreadRegister[m[K(uint32_t)[m[K',
+    inlined from '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K' at [01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:85:36[m[K:
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 7 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+In member function '[01m[Kuint8_t Module::[01;32m[KSPIreadRegister[m[K(uint32_t)[m[K',
+    inlined from '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K' at [01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:85:36[m[K:
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 8 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+In member function '[01m[Kuint8_t Module::[01;32m[KSPIreadRegister[m[K(uint32_t)[m[K',
+    inlined from '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K' at [01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:85:36[m[K:
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 9 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+In member function '[01m[Kuint8_t Module::[01;32m[KSPIreadRegister[m[K(uint32_t)[m[K',
+    inlined from '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K' at [01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:85:36[m[K:
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 10 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+In member function '[01m[Kuint8_t Module::[01;32m[KSPIreadRegister[m[K(uint32_t)[m[K',
+    inlined from '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K' at [01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:85:36[m[K:
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 11 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+In member function '[01m[Kuint8_t Module::[01;32m[KSPIreadRegister[m[K(uint32_t)[m[K',
+    inlined from '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K' at [01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:85:36[m[K:
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 12 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+In member function '[01m[Kuint8_t Module::[01;32m[KSPIreadRegister[m[K(uint32_t)[m[K',
+    inlined from '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K' at [01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:85:36[m[K:
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 13 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K
+In member function '[01m[Kuint8_t Module::[01;32m[KSPIreadRegister[m[K(uint32_t)[m[K',
+    inlined from '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K' at [01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:85:36[m[K:
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:135:19:[m[K [01;35m[Kwarning: [m[Kwriting 1 byte into a region of size 0 [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Warning-Options.html#index-Wno-stringop-overflow-Wstringop-overflow=]8;;[m[K]
+  135 |       [01;35m[K*(cmdPtr++) = (this->spiConfig.cmds[RADIOLIB_MODULE_SPI_COMMAND_READ] >> 8*i) & 0xFF[m[K;
+      |       [01;35m[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:[m[K In member function '[01m[Kint16_t Module::[01;32m[KSPIsetRegValue[m[K(uint32_t, uint8_t, uint8_t, uint8_t, uint8_t, uint8_t, bool)[m[K':
+[01m[K/home/ryanjeronimus/github/pico_comms/RadioLib/src/Module.cpp:132:13:[m[K [01;36m[Knote: [m[Kat offset 14 into destination object '[01m[Kcmd[m[K' of size 6
+  132 |     uint8_t [01;36m[Kcmd[m[K[6];
+      |             [01;36m[K^~~[m[K

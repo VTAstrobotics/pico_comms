@@ -1,0 +1,293 @@
+-- Defaulting build type to 'Release' since not specified.
+-- The C compiler identification is GNU 14.2.1
+-- The CXX compiler identification is GNU 14.2.1
+-- The ASM compiler identification is GNU
+-- Found assembler: /home/ryanjeronimus/.pico-sdk/toolchain/14_2_Rel1/bin/arm-none-eabi-gcc
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /home/ryanjeronimus/.pico-sdk/toolchain/14_2_Rel1/bin/arm-none-eabi-gcc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /home/ryanjeronimus/.pico-sdk/toolchain/14_2_Rel1/bin/arm-none-eabi-g++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Found Python3: /usr/bin/python3.12 (found version "3.12.3") found components: Interpreter
+-- Configuring done (0.7s)
+-- Generating done (0.1s)
+-- Build files have been written to: /home/ryanjeronimus/github/pico_comms/build/micro_ros_raspberrypicosdk
+[  1%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/Module.cpp.o[0m
+[  1%] [32mBuilding ASM object pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default.dir/compile_time_choice.S.o[0m
+[  1%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/CC1101/CC1101.cpp.o[0m
+[  2%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/LR11x0/LR1110.cpp.o[0m
+[  2%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/Hal.cpp.o[0m
+[  3%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/LR11x0/LR1121.cpp.o[0m
+[  4%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/LLCC68/LLCC68.cpp.o[0m
+[  4%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/LR11x0/LR1120.cpp.o[0m
+[  4%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/LR11x0/LR11x0_commands.cpp.o[0m
+[  5%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/LR11x0/LR11x0_crypto.cpp.o[0m
+[  7%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/LR11x0/LR11x0_gnss.cpp.o[0m
+[  7%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/LR11x0/LR11x0.cpp.o[0m
+[  7%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/LR11x0/LR11x0_wifi.cpp.o[0m
+[  8%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/RF69/RF69.cpp.o[0m
+[  8%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX123x/SX1231.cpp.o[0m
+[  9%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX123x/SX1233.cpp.o[0m
+[ 10%] [32m[1mLinking ASM executable bs2_default.elf[0m
+[ 10%] Built target bs2_default
+[ 11%] [34m[1mGenerating bs2_default.bin[0m
+[ 11%] [34m[1mGenerating bs2_default_padded_checksummed.S[0m
+[ 12%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX126x/STM32WLx.cpp.o[0m
+[ 12%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX126x/STM32WLx_Module.cpp.o[0m
+[ 13%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX126x/SX1261.cpp.o[0m
+[ 14%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX126x/SX1262.cpp.o[0m
+[ 14%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX126x/SX1268.cpp.o[0m
+[ 15%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX126x/SX126x.cpp.o[0m
+[ 15%] [32mBuilding ASM object pico-sdk/src/rp2350/boot_stage2/CMakeFiles/bs2_default_library.dir/bs2_default_padded_checksummed.S.o[0m
+[ 16%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX126x/SX126x_LR_FHSS.cpp.o[0m
+[ 16%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX126x/SX126x_commands.cpp.o[0m
+[ 16%] Built target bs2_default_library
+[ 17%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX126x/SX126x_config.cpp.o[0m
+[ 18%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX127x/SX1272.cpp.o[0m
+[ 18%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX127x/SX1273.cpp.o[0m
+[ 19%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX127x/SX1276.cpp.o[0m
+[ 19%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX127x/SX1277.cpp.o[0m
+[ 20%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX127x/SX1278.cpp.o[0m
+[ 21%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX127x/SX1279.cpp.o[0m
+[ 21%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX127x/SX127x.cpp.o[0m
+[ 22%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX128x/SX1280.cpp.o[0m
+[ 23%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX128x/SX1281.cpp.o[0m
+[ 23%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX128x/SX1282.cpp.o[0m
+[ 24%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/SX128x/SX128x.cpp.o[0m
+[ 25%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/Si443x/Si4430.cpp.o[0m
+[ 25%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/Si443x/Si4431.cpp.o[0m
+[ 26%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/Si443x/Si4432.cpp.o[0m
+[ 27%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/Si443x/Si443x.cpp.o[0m
+[ 27%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/modules/nRF24/nRF24.cpp.o[0m
+[ 28%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/AFSK/AFSK.cpp.o[0m
+[ 28%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/APRS/APRS.cpp.o[0m
+[ 29%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/AX25/AX25.cpp.o[0m
+[ 30%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/BellModem/BellModem.cpp.o[0m
+[ 30%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/ExternalRadio/ExternalRadio.cpp.o[0m
+[ 31%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/FSK4/FSK4.cpp.o[0m
+[ 32%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/Hellschreiber/Hellschreiber.cpp.o[0m
+[ 32%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/LoRaWAN/LoRaWAN.cpp.o[0m
+[ 34%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/LoRaWAN/LoRaWANBands.cpp.o[0m
+[ 35%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/Morse/Morse.cpp.o[0m
+[ 35%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/Pager/Pager.cpp.o[0m
+[ 36%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/PhysicalLayer/PhysicalLayer.cpp.o[0m
+[ 36%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/Print/ITA2String.cpp.o[0m
+[ 37%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/Print/Print.cpp.o[0m
+[ 38%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/RTTY/RTTY.cpp.o[0m
+[ 38%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/protocols/SSTV/SSTV.cpp.o[0m
+[ 39%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/utils/CRC.cpp.o[0m
+[ 40%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/utils/Cryptography.cpp.o[0m
+[ 40%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/utils/FEC.cpp.o[0m
+[ 41%] [32mBuilding CXX object RadioLib/CMakeFiles/RadioLib.dir/src/utils/Utils.cpp.o[0m
+[ 42%] [32m[1mLinking CXX static library libRadioLib.a[0m
+[ 42%] Built target RadioLib
+[ 44%] [32mBuilding CXX object CMakeFiles/science.dir/RadioLib/src/hal/RPiPico/PicoHal.cpp.o[0m
+[ 44%] [32mBuilding C object CMakeFiles/science.dir/pico_uart_transport.c.o[0m
+[ 44%] [32mBuilding CXX object CMakeFiles/science.dir/science.cpp.o[0m
+[ 45%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_stdlib/stdlib.c.o[0m
+[ 46%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_platform_panic/panic.c.o[0m
+[ 46%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_gpio/gpio.c.o[0m
+[ 47%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_platform_common/common.c.o[0m
+[ 47%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2350/pico_platform/platform.c.o[0m
+[ 48%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/common/hardware_claim/claim.c.o[0m
+[ 48%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_sync/sync.c.o[0m
+[ 49%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_sync_spin_lock/sync_spin_lock.c.o[0m
+[ 49%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_irq/irq.c.o[0m
+[ 50%] [32mBuilding ASM object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_irq/irq_handler_chain.S.o[0m
+[ 51%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/common/pico_sync/sem.c.o[0m
+[ 52%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/common/pico_sync/mutex.c.o[0m
+[ 52%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/common/pico_sync/lock_core.c.o[0m
+[ 53%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/common/pico_sync/critical_section.c.o[0m
+[ 53%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/common/pico_time/time.c.o[0m
+[ 54%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/common/pico_time/timeout_helper.c.o[0m
+[ 55%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_timer/timer.c.o[0m
+[ 55%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/common/pico_util/datetime.c.o[0m
+[ 56%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/common/pico_util/pheap.c.o[0m
+[ 56%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/common/pico_util/queue.c.o[0m
+[ 57%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_uart/uart.c.o[0m
+[ 58%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_clocks/clocks.c.o[0m
+[ 58%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_pll/pll.c.o[0m
+[ 59%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_vreg/vreg.c.o[0m
+[ 60%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_watchdog/watchdog.c.o[0m
+[ 60%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_ticks/ticks.c.o[0m
+[ 61%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_bootrom/bootrom.c.o[0m
+[ 62%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_bootrom/bootrom_lock.c.o[0m
+[ 62%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_boot_lock/boot_lock.c.o[0m
+[ 63%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_flash/flash.c.o[0m
+[ 64%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_xosc/xosc.c.o[0m
+[ 64%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_divider/divider.c.o[0m
+[ 65%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_runtime/runtime.c.o[0m
+[ 65%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_runtime_init/runtime_init.c.o[0m
+[ 67%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_runtime_init/runtime_init_clocks.c.o[0m
+[ 68%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_runtime_init/runtime_init_stack_guard.c.o[0m
+[ 68%] [32mBuilding ASM object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_bit_ops/bit_ops_aeabi.S.o[0m
+[ 69%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_divider/divider_compiler.c.o[0m
+[ 70%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_double/double_math.c.o[0m
+[ 70%] [32mBuilding ASM object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_double/double_aeabi_dcp.S.o[0m
+[ 71%] [32mBuilding ASM object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_double/double_fma_dcp.S.o[0m
+[ 72%] [32mBuilding ASM object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_double/double_sci_m33.S.o[0m
+[ 72%] [32mBuilding ASM object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_double/double_conv_m33.S.o[0m
+[ 73%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_float/float_math.c.o[0m
+[ 73%] [32mBuilding ASM object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_float/float_common_m33.S.o[0m
+[ 74%] [32mBuilding ASM object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_float/float_conv32_vfp.S.o[0m
+[ 74%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_malloc/malloc.c.o[0m
+[ 76%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_atomic/atomic.c.o[0m
+[ 76%] [32mBuilding ASM object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_float/float_sci_m33_vfp.S.o[0m
+[ 77%] [32mBuilding CXX object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_cxx_options/new_delete.cpp.o[0m
+[ 78%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_printf/printf.c.o[0m
+[ 78%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_standard_binary_info/standard_binary_info.c.o[0m
+[ 79%] [32mBuilding ASM object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_crt0/crt0.S.o[0m
+[ 79%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_clib_interface/newlib_interface.c.o[0m
+[ 80%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_stdio/stdio.c.o[0m
+[ 81%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_stdio_usb/reset_interface.c.o[0m
+[ 81%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_stdio_usb/stdio_usb.c.o[0m
+[ 82%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_stdio_usb/stdio_usb_descriptors.c.o[0m
+[ 82%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_unique_id/unique_id.c.o[0m
+[ 83%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_flash/flash.c.o[0m
+[ 84%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_xip_cache/xip_cache.c.o[0m
+[ 84%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/portable/raspberrypi/rp2040/dcd_rp2040.c.o[0m
+[ 85%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/portable/raspberrypi/rp2040/rp2040_usb.c.o[0m
+[ 86%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/device/usbd.c.o[0m
+[ 86%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/device/usbd_control.c.o[0m
+[ 87%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/audio/audio_device.c.o[0m
+[ 88%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/cdc/cdc_device.c.o[0m
+[ 88%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/dfu/dfu_device.c.o[0m
+[ 89%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/dfu/dfu_rt_device.c.o[0m
+[ 90%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/hid/hid_device.c.o[0m
+[ 90%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/midi/midi_device.c.o[0m
+[ 91%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/msc/msc_device.c.o[0m
+[ 91%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/net/ecm_rndis_device.c.o[0m
+[ 92%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/net/ncm_device.c.o[0m
+[ 93%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/usbtmc/usbtmc_device.c.o[0m
+[ 93%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/vendor/vendor_device.c.o[0m
+[ 94%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/class/video/video_device.c.o[0m
+[ 95%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/tusb.c.o[0m
+[ 95%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/lib/tinyusb/src/common/tusb_fifo.c.o[0m
+[ 97%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_fix/rp2040_usb_device_enumeration/rp2040_usb_device_enumeration.c.o[0m
+[ 97%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_spi/spi.c.o[0m
+[ 97%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/hardware_i2c/i2c.c.o[0m
+[ 98%] [32mBuilding C object CMakeFiles/science.dir/home/ryanjeronimus/.pico-sdk/sdk/2.2.0/src/rp2_common/pico_multicore/multicore.c.o[0m
+[100%] [32m[1mLinking CXX executable science.elf[0m
+[100%] Built target science
+-- Install configuration: "Release"
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/lib/libRadioLib.a
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/utils
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/utils/FEC.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/utils/CRC.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/utils/Utils.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/utils/Cryptography.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/Print
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/Print/ITA2String.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/Print/Print.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/AX25
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/AX25/AX25.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/ExternalRadio
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/ExternalRadio/ExternalRadio.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/Pager
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/Pager/Pager.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/RTTY
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/RTTY/RTTY.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/AFSK
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/AFSK/AFSK.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/LoRaWAN
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/LoRaWAN/LoRaWAN.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/BellModem
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/BellModem/BellModem.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/PhysicalLayer
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/PhysicalLayer/PhysicalLayer.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/Hellschreiber
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/Hellschreiber/Hellschreiber.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/FSK4
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/FSK4/FSK4.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/APRS
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/APRS/APRS.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/Morse
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/Morse/Morse.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/SSTV
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/protocols/SSTV/SSTV.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX126x
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX126x/SX126x.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX126x/patches
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX126x/patches/SX126x_patch_scan.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX126x/STM32WLx.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX126x/SX126x_commands.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX126x/SX1268.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX126x/STM32WLx_Module.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX126x/SX1262.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX126x/SX126x_registers.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX126x/SX1261.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/nRF24
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/nRF24/nRF24.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/CC1101
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/CC1101/CC1101.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX123x
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX123x/SX1231.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX123x/SX1233.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX127x
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX127x/SX1276.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX127x/SX127x.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX127x/SX1279.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX127x/SX1278.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX127x/SX1273.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX127x/SX1272.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX127x/SX1277.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LLCC68
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LLCC68/LLCC68.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/RF69
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/RF69/RF69.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/Si443x
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/Si443x/Si4432.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/Si443x/Si4431.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/Si443x/Si4430.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/Si443x/Si443x.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/RFM2x
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/RFM2x/RFM23.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/RFM2x/RFM22.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX128x
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX128x/SX1282.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX128x/SX1281.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX128x/SX1280.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/SX128x/SX128x.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/LR11x0.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/LR11x0_registers.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/LR11x0_commands.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/LR1110.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/LR11x0_firmware.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/LR1120.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/LR11x0_types.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/LR1121.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware/lr1120_transceiver_0201.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware/lr1120_transceiver_0102.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware/lr1110_transceiver_0306.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware/lr1110_transceiver_0308.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware/lr1120_transceiver_0101.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware/lr1121_transceiver_0103.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware/lr1110_transceiver_0401.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware/lr1110_transceiver_0305.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware/lr1110_transceiver_0304.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware/lr1121_transceiver_0102.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware/lr1110_transceiver_0303.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/modules/LR11x0/firmware/lr1110_transceiver_0307.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/BuildOpt.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/TypeDef.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/hal
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/hal/RPi
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/hal/RPi/PiHal.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/hal/RPiPico
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/hal/RPiPico/PicoHal.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/hal/Arduino
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/hal/Arduino/ArduinoHal.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/Hal.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/RadioLib.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/Module.h
+-- Installing: /home/ryanjeronimus/github/pico_comms/install/micro_ros_raspberrypicosdk/include/RadioLib/BuildOptUser.h
