@@ -11,6 +11,7 @@
 
 #include <sensor_msgs/msg/imu.h>
 #include <rmw_microros/rmw_microros.h>
+#include <cmath>
 
 #define I2C_PORT i2c0
 #define I2C_SDA 12
@@ -21,41 +22,44 @@ BNO055 imu(I2C_PORT);
 rcl_publisher_t imu_pub;
 sensor_msgs__msg__Imu imu_msg;
 
+
 void timer_callback(rcl_timer_t * timer, int64_t last_call_time)
 {
-    (void) last_call_time;
-
-    if (timer == NULL) {
-        return;
-    }
-
     float gyro_x, gyro_y, gyro_z;
     float accel_x, accel_y, accel_z;
-    float orientation_x, orientation_y, orientation_z;
+    float euler_x, euler_y, euler_z;
 
     imu.read_gyro(&gyro_x, &gyro_y, &gyro_z);
     imu.read_accel(&accel_x, &accel_y, &accel_z);
-    imu.read_orientation(&orientation_x, &orientation_y, &orientation_z); //you can add gravity if needed e.g.  
-    // imu.read_gravity(&grav_x, &grav_y, &grav_z);
+    imu.read_orientation(&euler_x, &euler_y, &euler_z);
 
 
-    imu_msg.angular_velocity.x = gyro_x;
-    imu_msg.angular_velocity.y = gyro_y;
-    imu_msg.angular_velocity.z = gyro_z;
+    const float deg_to_rad = 3.14159265358979323846f / 180.0f; //lol
+
+    float yaw   = euler_x * deg_to_rad;
+    float roll  = euler_y * deg_to_rad;
+    float pitch = euler_z * deg_to_rad;
+
+    float cy = cosf(yaw * 0.5f);
+    float sy = sinf(yaw * 0.5f);
+    float cp = cosf(pitch * 0.5f);
+    float sp = sinf(pitch * 0.5f);
+    float cr = cosf(roll * 0.5f);
+    float sr = sinf(roll * 0.5f);
+
+    imu_msg.orientation.w = cr * cp * cy + sr * sp * sy;
+    imu_msg.orientation.x = sr * cp * cy - cr * sp * sy;
+    imu_msg.orientation.y = cr * sp * cy + sr * cp * sy;
+    imu_msg.orientation.z = cr * cp * sy - sr * sp * cy;
+
+    imu_msg.angular_velocity.x = gyro_x * deg_to_rad;
+    imu_msg.angular_velocity.y = gyro_y * deg_to_rad;
+    imu_msg.angular_velocity.z = gyro_z * deg_to_rad;
+
 
     imu_msg.linear_acceleration.x = accel_x;
     imu_msg.linear_acceleration.y = accel_y;
     imu_msg.linear_acceleration.z = accel_z;
-
-    imu_msg.orientation.x = orientation_x;
-    imu_msg.orientation.y = orientation_y;
-    imu_msg.orientation.z = orientation_z;
-    imu_msg.orientation.w = 1.0;
-
-    imu_msg.orientation_covariance[0] = -1.0;
-
-    imu_msg.angular_velocity_covariance[0] = -1.0;
-    imu_msg.linear_acceleration_covariance[0] = -1.0;
 
     rcl_publish(&imu_pub, &imu_msg, NULL);
 }
@@ -97,7 +101,7 @@ int main() {
         ROSIDL_GET_MSG_TYPE_SUPPORT(sensor_msgs, msg, Imu),
         "imu/data"
     );
-    imu_msg = sensor_msgs__msg__Imu__create()[0];
+    sensor_msgs__msg__Imu__init(&imu_msg);
     rclc_timer_init_default(
         &timer,
         &support,
