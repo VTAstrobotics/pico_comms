@@ -13,6 +13,7 @@
 #include <rmw_microros/rmw_microros.h>
 #include "pico_uart_transport.h"
 #include <cmath>
+#include <math.h>
 
 #define I2C_PORT i2c0
 #define I2C_SDA 12
