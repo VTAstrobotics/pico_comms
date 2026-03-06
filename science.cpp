@@ -14,6 +14,7 @@
 #include "pico_uart_transport.h"
 #include <hardware/pwm.h>
 #include <hardware/clocks.h>
+#include <hardware/watchdog.h>
 
 
 // =====================================================
@@ -354,7 +355,7 @@ int main()
         pico_serial_transport_close,
         pico_serial_transport_write,
         pico_serial_transport_read);
-    sleep_ms(2000);
+    sleep_ms(1000);
 
     // printf("Science PCB – FSM + Pump Test + Heater Test\n");
 
@@ -393,7 +394,8 @@ int main()
     allocator = rcl_get_default_allocator();
 
     const int timeout_ms = 1000;
-    const uint8_t attempts = 120;
+    const uint8_t attempts = 5;
+    watchdog_enable(7000,0);
     rcl_ret_t ret = rmw_uros_ping_agent(timeout_ms, attempts);
 
     if (ret != RCL_RET_OK)
@@ -402,6 +404,7 @@ int main()
     }
     gpio_init(25);
     gpio_set_dir(25, GPIO_OUT);
+    watchdog_disable();
     gpio_put(25, 1);
 
     rclc_support_init(&support, 0, NULL, &allocator);
@@ -485,11 +488,11 @@ int main()
 
         case SYS_READ_SENSORS:
         {
-            float t = read_temperature();
+            float t = 0;// read_temperature();
             temperature_msg.data = t;
             rcl_ret_t ret = rcl_publish(&temperature_publisher, &temperature_msg, NULL);
 
-            float h = read_humidity();
+            float h = 0; //read_humidity();
             humidity_msg.data = h;
             rcl_ret_t ret_hum = rcl_publish(&humidity_publisher, &humidity_msg, NULL);
 
