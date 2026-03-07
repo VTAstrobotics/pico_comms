@@ -99,8 +99,9 @@ void on_uart_rx(void)
             isr_lines++;
             ready_to_publish = true;
             buff_select = !buff_select;
-            rosidl_runtime_c__String__assign(&uart_string.data, "uart rx");
-            auto ret = rcl_publish(&debug_publisher, &uart_string, NULL);
+                gps_buffer_internal = (buff_select) ? gps_buffer_1 : gps_buffer_0;
+            // rosidl_runtime_c__String__assign(&uart_string.data, "uart rx");
+            // auto ret = rcl_publish(&debug_publisher, &uart_string, NULL);
         }
     }
 }
@@ -147,8 +148,12 @@ void handle_navsat_publishing()
         gps_fields.push_back(gps1.substr(start, pos - start));
         start = pos + 1;
     }
+    // std_msgs__msg__String uart_string;
+    rosidl_runtime_c__String__assign(&uart_string.data, gps_fields[0].c_str());
+    auto ret = rcl_publish(&debug_publisher, &uart_string, NULL);
 
-    if (gps_fields.size() > (size_t)LONG_DIR && gps_fields[0] == "$GPGGA")
+    if (gps_fields.size() > (size_t)LONG_DIR && 
+    (gps_fields[0] == "$GPGGA" || gps_fields[0] == "$GNGGA"))
     {
         if (!gps_fields[LAT_FIELD].empty() && !gps_fields[LONG_FIELD].empty() &&
             !gps_fields[LAT_DIR].empty() && !gps_fields[LONG_DIR].empty())
