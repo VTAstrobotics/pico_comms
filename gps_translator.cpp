@@ -34,7 +34,7 @@ rcl_publisher_t publisher;
 sensor_msgs__msg__NavSatFix msg;
 
 #define UART_ID uart1
-#define BAUD_RATE 38400
+#define BAUD_RATE 57600
 #define DATA_BITS 8
 #define STOP_BITS 1
 #define PARITY UART_PARITY_NONE
@@ -172,10 +172,10 @@ void handle_navsat_publishing()
 
             rcl_ret_t pub_ret = rcl_publish(&navsat_publisher, &navsat_msg, NULL);
             (void)pub_ret;
-        }
-    }
     rosidl_runtime_c__String__assign(&debug.data, "made it");
     auto ret = rcl_publish(&debug_publisher, &debug, NULL);
+        }
+    }
 }
 
 int main()
@@ -277,8 +277,8 @@ int main()
         {
             handle_navsat_publishing();
         }
-        rosidl_runtime_c__String__assign(&debug.data, "main loop");
-        auto ret = rcl_publish(&debug_publisher, &debug, NULL);
+        // rosidl_runtime_c__String__assign(&debug.data, "main loop");
+        // auto ret = rcl_publish(&debug_publisher, &debug, NULL);
         rclc_executor_spin_some(&executor, RCL_MS_TO_NS(100));
     }
     return 0;
