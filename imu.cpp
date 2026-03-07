@@ -14,6 +14,7 @@
 #include "pico_uart_transport.h"
 #include <cmath>
 #include <math.h>
+#include "micro_ros_utilities/string_utilities.h"
 
 #define I2C_PORT i2c0
 #define I2C_SDA 12
@@ -46,6 +47,11 @@ void timer_callback(rcl_timer_t *timer, int64_t last_call_time)
     float sp = sinf(pitch * 0.5f);
     float cr = cosf(roll * 0.5f);
     float sr = sinf(roll * 0.5f);
+
+    int64_t time_ns = rmw_uros_epoch_nanos();
+    imu_msg.header.stamp.sec = (int32_t)(time_ns / 1000000000LL);
+    imu_msg.header.stamp.nanosec = (uint32_t)(time_ns % 1000000000LL);
+    imu_msg.header.frame_id = micro_ros_string_utilities_set(imu_msg.header.frame_id, "imu_frame");
 
     imu_msg.orientation.w = cr * cp * cy + sr * sp * sy;
     imu_msg.orientation.x = sr * cp * cy - cr * sp * sy;
